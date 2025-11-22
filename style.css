@@ -1,0 +1,174 @@
+/* --- Color Palette ---
+   Primary: #A36A9F (Muted Lavender/Mauve)
+   Accent: #D7BDE2 (Very Light Lavender)
+   Text: #3F3F3F (Deep Charcoal Gray)
+   Background: #F5F5F5 (Soft Off-White)
+   Highlight: #5D9CEC (Silver/Cool Blue for contrast)
+*/
+
+/* ---------------------------------- */
+/* 1. Base Styles & Typography        */
+/* ---------------------------------- */
+body {
+    font-family: 'Georgia', serif; /* Elegant, classic font */
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8EAF6 100%); /* Subtle, clean gradient */
+    color: #3F3F3F;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ---------------------------------- */
+/* 2. Container & Layout              */
+/* ---------------------------------- */
+
+.container {
+    background-color: #ffffff;
+    padding: 35px 50px;
+    border-radius: 18px; /* Slightly softer corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Soft, subtle shadow */
+    text-align: center;
+    max-width: 650px;
+    width: 90%;
+    margin: 20px;
+    border: 1px solid #D7BDE2; /* Thin, light lavender border */
+}
+
+/* Main heading style */
+#main-heading {
+    color: #A36A9F; /* Primary Lavender */
+    font-family: 'Times New Roman', serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* Horizontal rule separator */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #D7BDE2;
+    margin: 30px 0;
+}
+
+/* ---------------------------------- */
+/* 3. Countdown & Message Sections    */
+/* ---------------------------------- */
+
+/* Text containing the countdown number */
+#countdown-text {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #555;
+}
+
+/* The actual days remaining number—make it dominant */
+#days-remaining {
+    display: block;
+    font-family: 'Times New Roman', serif;
+    font-size: 6em; 
+    font-weight: 900;
+    color: #3F3F3F; /* Deep Charcoal for elegance */
+    line-height: 1;
+    margin: 10px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    /* Subtle fade-in animation on load */
+    animation: fade-in 1.5s ease-out; 
+}
+
+/* Daily encouragement section heading */
+#message-section h2 {
+    color: #5D9CEC; /* Silver/Cool Blue contrast */
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* Random message text container */
+.riddle-box, .message-box {
+    padding: 20px;
+    border: 1px solid #D7BDE2; /* Thin, elegant border */
+    border-radius: 10px;
+    background-color: #FAFAFA; /* Very light subtle background */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Soft inner shadow */
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* ---------------------------------- */
+/* 4. Birthday Surprise Section       */
+/* ---------------------------------- */
+
+#surprise-section h2 {
+    color: #A36A9F; /* Primary Lavender */
+    font-size: 2em;
+    text-shadow: 1px 1px 0 #E8EAF6;
+    animation: pulse-elegant 2s infinite alternate; 
+}
+
+/* Button style */
+button {
+    background-color: #5D9CEC; /* Cool Blue/Silver contrast button */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1em;
+    margin-top: 30px;
+    border-radius: 8px; /* Square/elegant buttons */
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(93, 156, 236, 0.3);
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #79A9F0;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(93, 156, 236, 0.4);
+}
+
+/* QR Code Display */
+#qr-code-display {
+    margin-top: 30px;
+}
+
+#qr-code-display img {
+    max-width: 100%;
+    height: auto;
+    border: 4px solid #A36A9F; /* Lavender border */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#birthday-message-text {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #E8EAF6; /* Very light blue-gray background */
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 0.9em;
+}
+
+/* Input Fields and Feedback */
+#cipher-input:focus, #guess-input:focus {
+    outline: none;
+    border-color: #A36A9F; /* Lavender focus color */
+    box-shadow: 0 0 5px rgba(163, 106, 159, 0.5); 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.feedback-success {
+    color: #4CAF50; /* Keep success green */
+}
+.feedback-fail {
+    color: #E91E63; /* Use a deeper accent pink for failure */
+}
+
+/* ---------------------------------- */
+/* 5. Custom Animations               */
+/*

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheena's Birthday Countdown</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="main-heading">Birthday Countdown</h1>
+        <p id="countdown-text">
+            There are 
+            <span id="days-remaining">...</span> 
+            day(s) left until your birthday, Sheena!
+        </p>
+
+        <hr>
+
+        <div id="message-section">
+            <h2>Your Daily Encouragement:</h2>
+            <p id="encouraging-message"></p>
+        </div>
+
+        <div id="surprise-section" style="display:none;">
+            <h2>🎉 HAPPY BIRTHDAY, SHEENA! 🎉</h2>
+            <p>Click below for your special surprise:</p>
+            <button onclick="generateQRCode()">View Surprise QR Code</button>
+            <div id="qr-code-display"></div>
+            <p id="birthday-message-text"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
