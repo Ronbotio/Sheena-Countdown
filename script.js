@@ -15,7 +15,7 @@ const MESSAGES = [
     "Ephesians 2:10: 'For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.'",
     "Joshua 1:9: 'Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.'",
     "Psalm 139:14: 'I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.'",
-    "2 Corinthians 12:9: 'But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.''",
+    "2 Corinthians 12:9: 'But he said to me, 'My grace is sufficient for you, for his power is made perfect in weakness.''",
     "Romans 8:28: 'And we know that in all things God works for the good of those who love him, who have been called according to his purpose.'",
     "Isaiah 40:31: 'But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary; they will walk and not be faint.'",
     "1 Peter 5:7: 'Cast all your anxiety on him because he cares for you.'",
@@ -127,11 +127,10 @@ let gameState = {
 // Function to calculate and display the countdown
 function updateCountdown() {
     
-    // --- FINAL DEFINITIVE DATE CALCULATION BLOCK (Midnight Fix) ---
+    // --- FINAL DEFINITIVE DATE CALCULATION BLOCK (Robust Fix) ---
     
-    // 1. Define Target Date (Set to the very start of the day: 00:00:00)
-    const [year, month, day] = BIRTHDAY_DATE_STRING.split('-').map(Number);
-    const targetDate = new Date(year, month - 1, day); 
+    // 1. Define Target Date using the standard YYYY/MM/DD format (Safest Initialization)
+    const targetDate = new Date(BIRTHDAY_DATE_STRING.replace(/-/g, '/')); 
     targetDate.setHours(0, 0, 0, 0); 
     
     // 2. Define Today's Date (Set today to the very start of the day)
@@ -140,7 +139,7 @@ function updateCountdown() {
     
     const msDifference = targetDate.getTime() - today.getTime();
     
-    // Math.floor ensures the number only changes exactly at midnight.
+    // Math.floor ensures the number only changes exactly at midnight (25 days remaining today).
     const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
 
     // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
@@ -328,10 +327,6 @@ function generateQRCode() {
     document.getElementById('birthday-message-text').textContent = "Scan the code above to open your special digital birthday card!";
 }
 
-// --- Placeholder/Obsolete Reminder Functions (Kept empty for safety) ---
-function sendBirthdayReminder() {}
-
-
 // --- JAVASCRIPT LOGIC FOR CHAT BUBBLE & BADGE ---
 
 // Function to toggle the chat panel visibility
@@ -389,20 +384,4 @@ function loadAnnouncements() {
     }
 }
 
-// Function to mark all current announcements as read
-function markMessagesAsRead() {
-    const today = new Date().toISOString().split('T')[0];
-    const newReadAnnouncements = ANNOUNCEMENTS
-        .filter(ann => ann.date <= today)
-        .map(ann => ann.date);
-    
-    localStorage.setItem('readAnnouncements', JSON.stringify(newReadAnnouncements));
-    loadAnnouncements();
-}
-
-
-// Initialize the countdown when the page loads
-loadAnnouncements();
-updateCountdown();
-// Update the countdown every minute
-setInterval(updateCountdown, 1000 * 60);
+// Function to mark
