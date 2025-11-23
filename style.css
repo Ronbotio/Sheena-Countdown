@@ -172,8 +172,6 @@ button:hover {
 /* ---------------------------------- */
 /* 5. Custom Animations               */
 
-/*
-
 /* Add this to style.css */
 .hint-text {
     font-size: 0.9em;
@@ -287,3 +285,4 @@ button:hover {
 .hidden {
     display: none !important;
 }
+
