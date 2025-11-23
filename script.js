@@ -166,7 +166,7 @@ function updateCountdown() {
         document.getElementById('main-heading').textContent = "Birthday Countdown";
         
         // **RESTORED TEXT CONTENT** - Ensure the structure matches index.html
-        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
+        document.getElementById('countdown-text').textContent = `I broke the countdown. Repair in progress...😁😁. Love you ${BIRTHDAY_PERSON}!`;
         // The number is updated separately via #days-remaining
         
         surpriseSection.style.display = 'none';
@@ -412,3 +412,4 @@ loadAnnouncements();
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
+
