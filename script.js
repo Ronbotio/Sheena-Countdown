@@ -94,6 +94,11 @@ const ANSWERS_DECODED = [
 const ANNOUNCEMENTS = [
     { 
         date: "2025-11-23", // YYYY-MM-DD format (Current date)
+        title: "🔔 TEST: New Badge Alert!", 
+        message: "This is a test to verify the unread badge and local storage are working correctly." 
+    },
+    { 
+        date: "2025-11-23", 
         title: "Welcome to the Countdown!", 
         message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
     },
@@ -159,7 +164,11 @@ function updateCountdown() {
         
         // 1. Reset display elements for COUNTDOWN MODE
         document.getElementById('main-heading').textContent = "Birthday Countdown";
-        document.getElementById('countdown-text').textContent = `I broke the countdown. Repair in progress...😁. Love you ${BIRTHDAY_PERSON}!`;
+        
+        // **RESTORED TEXT CONTENT** - Ensure the structure matches index.html
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
+        // The number is updated separately via #days-remaining
+        
         surpriseSection.style.display = 'none';
         activitySection.style.display = 'block';
 
