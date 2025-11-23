@@ -1,3 +1,83 @@
+// --- JAVASCRIPT LOGIC FOR CHAT BUBBLE & BADGE ---
+
+// Function to toggle the chat panel visibility
+function toggleChatPanel() {
+    const panel = document.getElementById('announcement-panel');
+    const badge = document.getElementById('unread-badge');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        // When panel opens, mark all currently visible messages as read
+        markMessagesAsRead();
+    } else {
+        panel.classList.add('hidden');
+    }
+}
+
+// Function to load announcements and calculate the badge count
+function loadAnnouncements() {
+    const today = new Date().toISOString().split('T')[0];
+    const listElement = document.getElementById('announcement-list');
+    const badgeElement = document.getElementById('unread-badge');
+    const readAnnouncements = JSON.parse(localStorage.getItem('readAnnouncements') || '[]');
+    let unreadCount = 0;
+    let listHTML = '';
+
+    // Filter announcements that should be active today or any day before
+    const activeAnnouncements = ANNOUNCEMENTS.filter(ann => ann.date <= today);
+
+    if (activeAnnouncements.length === 0) {
+        listElement.innerHTML = '<p class="placeholder-message">No new announcements yet.</p>';
+        badgeElement.classList.add('hidden');
+        return;
+    }
+
+    activeAnnouncements.reverse().forEach(ann => {
+        const isRead = readAnnouncements.includes(ann.date);
+        
+        // Build the HTML for the announcement item
+        listHTML += `
+            <div class="announcement-item ${isRead ? 'read' : ''}" data-date="${ann.date}">
+                <h4>${ann.title}</h4>
+                <p>${ann.message}</p>
+            </div>
+        `;
+        
+        if (!isRead) {
+            unreadCount++;
+        }
+    });
+
+    listElement.innerHTML = listHTML;
+    
+    // Update the badge count
+    if (unreadCount > 0) {
+        badgeElement.textContent = unreadCount;
+        badgeElement.classList.remove('hidden');
+    } else {
+        badgeElement.classList.add('hidden');
+    }
+}
+
+// Function to mark all current announcements as read
+function markMessagesAsRead() {
+    const today = new Date().toISOString().split('T')[0];
+    const newReadAnnouncements = ANNOUNCEMENTS
+        .filter(ann => ann.date <= today)
+        .map(ann => ann.date);
+    
+    // Store the dates of all currently visible announcements as 'read'
+    localStorage.setItem('readAnnouncements', JSON.stringify(newReadAnnouncements));
+    
+    // Refresh the view to update badge and dim read items
+    loadAnnouncements();
+}
+
+// --- CALL THIS FUNCTION AT THE END OF YOUR SCRIPT ---
+loadAnnouncements();
+// ---------------------------------------------------
+
+
 // --- NEW: ANNOUNCEMENT DATA ---
 const ANNOUNCEMENTS = [
     { 
@@ -303,5 +383,6 @@ updateCountdown();
 // Update the countdown every minute
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
