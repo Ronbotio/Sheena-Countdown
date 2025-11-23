@@ -56,7 +56,7 @@ const MESSAGES = [
     "Remember that time we walked Stone Mountain in the AM. I started to walk ahead in an attempt to encourage you. Little did I know. I'll never forget your solemn expression. First time I'd encountered upset Sheena. Awkward moment but it built our friendship.",
     "I'm so thankful for the day we met at Blueprint Stone Mountain. I knew we'd be great friends when started our morning Stone Mountain walks and that led to us doing a 7 day water fast...the rest is history.😁",
     "I love our friendship. One of my most cherished moments is when we went out to the playground with Zachariah in the Avana 29 apartment complex. I think we played tag and climbed the monkey bars. He was 4 or 5 years old at the time.",
-    "Just thinking about all our food runs: Whole Foods - Bangkok Street Food - Maple Street Biscuit Company - Dekalb Farmers Market - Okiboru Ramen - Ramen Gallery - Wally World - Publix - Popshelf - Just name a few. 😋",
+    "Just thinking about all our food runs: Whole Foods - Bangkok Street Food - Maple Street Biscuit Company - Dekalb Farmers Market - Okiboru Ramen - Ramen Gallery - Wally World - Publix - Popshelf - Just to name a few. 😋",
     "Thank you for being the kind of friend to: Sit in total slience with - Be ever on mission for Jesus Christ! - Have gut bursting laughter with - Challenge me even when I don't feel like it - Encourage my days of anger, happiness, joy, sorrow, and grief with sober relevant words reflecting christ-like character - Out do me in servant hood...etc.💓",
     "I'm over joyed to be walking through this season of life with you KP! Lets GOOOOOOOOOO!💪🏾😁",
     "I've always admired your unwavering patience. I see the fruit of the spirit in you!",
@@ -417,6 +417,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
