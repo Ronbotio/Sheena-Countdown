@@ -128,38 +128,42 @@ let gameState = {
 // Function to calculate and display the countdown
 function updateCountdown() {
     
-    // 1. DATE CALCULATION (Midnight Fix)
-    const [year, month, day] = BIRTHDAY_DATE_STRING.split('-').map(Number);
+    // --- FINAL DEFINITIVE DATE CALCULATION BLOCK (Midnight Fix) ---
     
-    const targetDate = new Date(year, month - 1, day); 
+    // 1. Define Target Date (Use the string for initialization)
+    const targetDate = new Date(BIRTHDAY_DATE_STRING); 
+    // Set target time to the very start of the day (00:00:00)
     targetDate.setHours(0, 0, 0, 0); 
     
+    // 2. Define Today's Date (Set today to the very start of the day)
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
     
+    // Calculate difference in milliseconds
     const msDifference = targetDate.getTime() - today.getTime();
+    
+    // Convert milliseconds to days. Math.floor ensures the number only changes at midnight.
     const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
 
-    // Update the main number display element immediately
+    // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
+
+    // Update main number display BEFORE the logic starts
     document.getElementById('days-remaining').textContent = daysRemaining;
     
     const surpriseSection = document.getElementById('surprise-section');
     const activitySection = document.getElementById('message-section');
 
-    // 2. PRIMARY CONDITIONAL LOGIC (Determines Display State)
-
     if (daysRemaining > 0) {
         
         // --- COUNTDOWN MODE ---
         
-        // **CRITICAL:** Ensure the activity section is made visible here
-        surpriseSection.style.display = 'none';
-        activitySection.style.display = 'block'; 
-
+        // 1. Reset display elements for COUNTDOWN MODE
         document.getElementById('main-heading').textContent = "Birthday Countdown";
         document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
-        
-        // --- Randomly select and display the daily activity ---
+        surpriseSection.style.display = 'none';
+        activitySection.style.display = 'block';
+
+        // 2. Randomly select and display the daily activity
         const activityChoice = Math.floor(Math.random() * 3); 
         
         if (activityChoice === 0) {
@@ -169,8 +173,6 @@ function updateCountdown() {
         } else {
             displayGuessingGame();
         }
-    
-    // ... (rest of the function)
 
     } else if (daysRemaining === 0) {
         
@@ -181,7 +183,6 @@ function updateCountdown() {
         
         // Ensure the birthday logic runs:
         generateQRCode(); 
-        sendBirthdayReminder(); 
         
         activitySection.style.display = 'none';
         surpriseSection.style.display = 'block';
@@ -417,6 +418,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
