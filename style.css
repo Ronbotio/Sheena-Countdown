@@ -273,7 +273,7 @@ button:hover {
 .announcement-item h4 {
     margin: 0 0 5px 0;
     font-size: 1em;
-    color: #A36A9F;
+    color: #5D9CEC;
 }
 
 .announcement-item p {
@@ -285,4 +285,5 @@ button:hover {
 .hidden {
     display: none !important;
 }
+
 
