@@ -1,3 +1,28 @@
+// --- NEW: ANNOUNCEMENT DATA ---
+const ANNOUNCEMENTS = [
+    { 
+        date: "2025-11-23", // YYYY-MM-DD format
+        title: "Welcome to the Countdown!", 
+        message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
+    },
+    { 
+        date: "2025-12-06", 
+        title: "🎁 December 6th Surprise Alert!", 
+        message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
+    },
+    { 
+        date: "2025-12-12", 
+        title: "🎬 Video Reminder!", 
+        message: "Just a reminder about the birthday video—make sure it's ready!" 
+    },
+    { 
+        date: "2025-12-20", 
+        title: "✈️ Jeju Spa & Christmas Canteen!", 
+        message: "The post-birthday events are today! Have a wonderful time!" 
+    }
+];
+// ----------------------------------
+
 // --- CONFIGURATION ---
 const BIRTHDAY_PERSON = "Sheena";
 // IMPORTANT: Keep this date accurate for the calculation (YYYY-MM-DD)
@@ -278,4 +303,5 @@ updateCountdown();
 // Update the countdown every minute
 
 setInterval(updateCountdown, 1000 * 60);
+
 
