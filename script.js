@@ -125,6 +125,21 @@ let gameState = {
 
 // --- CORE FUNCTIONS ---
 
+// Function to pick and display a random message
+function displayRandomMessage() {
+    // Selects a random index based on the length of the global MESSAGES array
+    const randomIndex = Math.floor(Math.random() * MESSAGES.length);
+    
+    // Gets the dedicated HTML container for activities
+    const activityElement = document.getElementById('message-section'); 
+    
+    // Overwrites the inner HTML with the new content
+    activityElement.innerHTML = `
+        <h2>💌 Your Daily Encouragement:</h2>
+        <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
+    `;
+}
+
 // Function to calculate and display the countdown
 function updateCountdown() {
     
@@ -152,12 +167,13 @@ function updateCountdown() {
         
         // --- COUNTDOWN MODE ---
         
-        // Ensure the display elements are correct for this mode
-        document.getElementById('main-heading').textContent = "Birthday Countdown";
-        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRSDAY_PERSON}!`;
+        // **CRITICAL:** Ensure the activity section is made visible here
         surpriseSection.style.display = 'none';
-        activitySection.style.display = 'block';
+        activitySection.style.display = 'block'; 
 
+        document.getElementById('main-heading').textContent = "Birthday Countdown";
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
+        
         // --- Randomly select and display the daily activity ---
         const activityChoice = Math.floor(Math.random() * 3); 
         
@@ -168,6 +184,8 @@ function updateCountdown() {
         } else {
             displayGuessingGame();
         }
+    
+    // ... (rest of the function)
 
     } else if (daysRemaining === 0) {
         
@@ -399,6 +417,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
