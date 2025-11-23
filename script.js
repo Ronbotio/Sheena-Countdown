@@ -128,24 +128,29 @@ let gameState = {
 // Function to calculate and display the countdown
 function updateCountdown() {
     
-    // --- FINAL DEFINITIVE DATE CALCULATION BLOCK (Midnight Fix) ---
-    
+    // --- FINAL CORRECTED DATE CALCULATION BLOCK ---
+
     // 1. Define Target Date (Use the string for initialization)
     const targetDate = new Date(BIRTHDAY_DATE_STRING); 
-    // Set target time to the very start of the day (00:00:00)
+    
+    // Set target date to midnight (00:00:00)
     targetDate.setHours(0, 0, 0, 0); 
     
-    // 2. Define Today's Date (Set today to the very start of the day)
+    // Advance the target date by 1 day to ensure the calculation yields the correct number
+    targetDate.setDate(targetDate.getDate() + 1);
+
+    // 2. Define Today's Date (Set today to midnight)
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
     
     // Calculate difference in milliseconds
     const msDifference = targetDate.getTime() - today.getTime();
     
-    // Convert milliseconds to days. Math.floor ensures the number only changes at midnight.
-    const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
+    // Convert milliseconds to days and use Math.floor to ensure we count full 24h periods
+    // Subtracting 1 day from the result accounts for the day we added to the target date.
+    const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24)) - 1;
 
-    // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
+    // --- END FINAL CORRECTED DATE CALCULATION BLOCK ---
 
     // Update main number display BEFORE the logic starts
     document.getElementById('days-remaining').textContent = daysRemaining;
@@ -418,6 +423,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
