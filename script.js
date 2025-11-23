@@ -61,7 +61,7 @@ const RIDDLES_ENCODED = [
     "V'z n grne-qebc onxrq va pynl, cresrpg sbe fpbbpvng pheel njnl. Jung nz V?",
     "V sel jvgu abguvat ohg n thfg, znxvat sbbq pevic jvgu n tbyqra pehfg. Jung nz V?",
     "V nz gur pbybe bs eblnygl, n zvk bs cnffvba'f erq naq pnyz frn oyhr. Jung nz V?",
-    "V nz bar yrff guna sbegl'f pbhag, guerr gvzrf guvegrra vf zl nzbhag. Jung ahzure nz V?",
+    "V nz bar yrff guna sbegl'f pbhag, guerr gvzmf guvegrra vf zl nzbhag. Jung ahzure nz V?",
     "V'z n Puevfgvna enccre jub oevatf gur urng, jvgu \"Ob Eneqv\" naq \"Unccl\" orngf. Jub nz V?",
     "V jnf n cebcurg, zhgr sbe n gvzr, gur sngure bs n Oncgvfg fhoyzmzr. Jub nz V?",
     "V'z n ehaavat fubr gung urycf lbh syl, anzrq sbe gur jvatrq ubefv va gur fxl. Jung nz V?",
@@ -135,6 +135,7 @@ function updateCountdown() {
     // --- FINAL STABLE DATE CALCULATION BLOCK (Integer Arithmetic) ---
     
     // 1. Define Target Date using the string (Safest Initialization)
+    // Using replace fixes browser parsing issues with hyphens
     const targetDate = new Date(BIRTHDAY_DATE_STRING.replace(/-/g, '/')); 
     
     // 2. Define Today's Date 
@@ -165,8 +166,8 @@ function updateCountdown() {
         // 1. Reset display elements for COUNTDOWN MODE
         document.getElementById('main-heading').textContent = "Birthday Countdown";
         
-        // **RESTORED TEXT CONTENT** - Ensure the structure matches index.html
-        document.getElementById('countdown-text').textContent = `I broke the countdown. Repair in progress...😁😁. Love you ${BIRTHDAY_PERSON}!`;
+        // RESTORED TEXT: Must match index.html's original structure
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
         // The number is updated separately via #days-remaining
         
         surpriseSection.style.display = 'none';
@@ -238,13 +239,16 @@ function displayCipherGame() {
     activityElement.innerHTML = `
         <h2>🔒 ROT13 Cipher Challenge!</h2>
         <p class="instruction">Decode the riddle below. (Hint: Each letter is shifted 13 places.)</p>
-        
+        <p class="riddle-box">${RIDDLES_ENCODED[randomIndex]}</p>
+        <div class="input-group">
+
+
         <p class="hint-text">
             Stuck? Use this online tool: 
             <a href="https://rot13.com/" target="_blank">ROT13 Decoder</a>
         </p>
-        <p class="riddle-box">${RIDDLES_ENCODED[randomIndex]}</p>
-        <div class="input-group">
+
+
             <input type="text" id="cipher-input" placeholder="Your answer...">
             <button onclick="checkCipherAnswer()">Submit</button>
         </div>
@@ -417,5 +421,3 @@ loadAnnouncements();
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
-
-
