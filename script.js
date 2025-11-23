@@ -125,21 +125,6 @@ let gameState = {
 
 // --- CORE FUNCTIONS ---
 
-// Function to pick and display a random message
-function displayRandomMessage() {
-    // Selects a random index based on the length of the global MESSAGES array
-    const randomIndex = Math.floor(Math.random() * MESSAGES.length);
-    
-    // Gets the dedicated HTML container for activities
-    const activityElement = document.getElementById('message-section'); 
-    
-    // Overwrites the inner HTML with the new content
-    activityElement.innerHTML = `
-        <h2>💌 Your Daily Encouragement:</h2>
-        <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
-    `;
-}
-
 // Function to calculate and display the countdown
 function updateCountdown() {
     
@@ -215,6 +200,21 @@ function updateCountdown() {
         surpriseSection.style.display = 'none';
         displayRandomMessage();
     }
+}
+
+// Function to pick and display a random message
+function displayRandomMessage() {
+    // Selects a random index based on the length of the global MESSAGES array
+    const randomIndex = Math.floor(Math.random() * MESSAGES.length);
+    
+    // Gets the dedicated HTML container for activities
+    const activityElement = document.getElementById('message-section'); 
+    
+    // Overwrites the inner HTML with the new content
+    activityElement.innerHTML = `
+        <h2>💌 Your Daily Encouragement:</h2>
+        <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
+    `;
 }
 
 // --- CIPHER GAME LOGIC (ROT13) ---
@@ -417,6 +417,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
