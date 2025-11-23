@@ -128,41 +128,37 @@ let gameState = {
 // Function to calculate and display the countdown
 function updateCountdown() {
     
-    // =======================================================
-    // === FINAL DEFINITIVE DATE CALCULATION BLOCK (Midnight Fix) ===
-    // =======================================================
-
-    // Get components from the string
+    // 1. DATE CALCULATION (Midnight Fix)
     const [year, month, day] = BIRTHDAY_DATE_STRING.split('-').map(Number);
     
-    // 1. Define Target Date (Set to the very start of the day: 00:00:00)
-    const targetDate = new Date(year, month - 1, day); // Month is 0-indexed in JS
+    const targetDate = new Date(year, month - 1, day); 
     targetDate.setHours(0, 0, 0, 0); 
     
-    // 2. Define Today's Date (Set today to the very start of the day: 00:00:00)
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
     
-    // Calculate difference in milliseconds
     const msDifference = targetDate.getTime() - today.getTime();
-    
-    // Convert milliseconds to days. Math.floor ensures the number only changes at midnight.
     const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
 
-    // =======================================================
-    // === END DATE CALCULATION BLOCK ===
-    // =======================================================
-
-
-    // Update main heading and countdown number
+    // Update the main number display element immediately
     document.getElementById('days-remaining').textContent = daysRemaining;
     
     const surpriseSection = document.getElementById('surprise-section');
     const activitySection = document.getElementById('message-section');
 
+    // 2. PRIMARY CONDITIONAL LOGIC (Determines Display State)
+
     if (daysRemaining > 0) {
         
-        // --- Randomly select and display the activity (0, 1, or 2) ---
+        // --- COUNTDOWN MODE ---
+        
+        // Ensure the display elements are correct for this mode
+        document.getElementById('main-heading').textContent = "Birthday Countdown";
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRSDAY_PERSON}!`;
+        surpriseSection.style.display = 'none';
+        activitySection.style.display = 'block';
+
+        // --- Randomly select and display the daily activity ---
         const activityChoice = Math.floor(Math.random() * 3); 
         
         if (activityChoice === 0) {
@@ -173,57 +169,34 @@ function updateCountdown() {
             displayGuessingGame();
         }
 
-        document.getElementById('main-heading').textContent = "Birthday Countdown";
-        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
-        surpriseSection.style.display = 'none';
-        activitySection.style.display = 'block';
-
     } else if (daysRemaining === 0) {
+        
         // --- IT'S THE BIRTHDAY! ---
         document.getElementById('main-heading').textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
         document.getElementById('countdown-text').textContent = 'The celebration is NOW!';
-        document.getElementById('days-remaining').textContent = '0'; // Display 0 cleanly
+        document.getElementById('days-remaining').textContent = '0'; 
         
-        // This is where the birthday surprise is called
+        // Ensure the birthday logic runs:
         generateQRCode(); 
-        sendBirthdayReminder(); // Ensure this is run on the birthday
+        sendBirthdayReminder(); 
         
         activitySection.style.display = 'none';
         surpriseSection.style.display = 'block';
 
     } else if (daysRemaining < 0) {
+        
         // --- BIRTHDAY HAS PASSED ---
-        // Display absolute value of days
         const daysAgo = Math.abs(daysRemaining); 
         
         document.getElementById('main-heading').textContent = `Birthday Has Passed`;
         document.getElementById('countdown-text').textContent = `The birthday was ${daysAgo} days ago.`;
-        document.getElementById('days-remaining').textContent = `—`; // Placeholder dash
+        document.getElementById('days-remaining').textContent = `—`; 
         
-        // Still run a message for reflection
+        // Display a random message for continued engagement
         activitySection.style.display = 'block';
         surpriseSection.style.display = 'none';
         displayRandomMessage();
     }
-    
-    // Ensure specific date reminders are checked every time the page loads
-    sendSpecificReminder(
-        SURPRISE_REMINDER_DATE, 
-        "🗓️ DECEMBER 6TH: Countdown Alert!", 
-        "Only 12 days left until the Birthday Surprise! Are you ready?"
-    );
-    
-    sendSpecificReminder(
-        VIDEO_REMINDER_DATE, 
-        "🎬 DECEMBER 12TH: Video Surprise Check!", 
-        "Make sure the Birthday Video is finalized and ready to share! You're almost there!"
-    );
-    
-    sendSpecificReminder(
-        EVENT_REMINDER_DATE, 
-        "🎊 DECEMBER 20TH: Post-Birthday Events!", 
-        "Today is the Jeju Spa & Christmas Canteen with the fam! Enjoy the celebration!"
-    );
 }
 
 // --- CIPHER GAME LOGIC (ROT13) ---
@@ -426,6 +399,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
