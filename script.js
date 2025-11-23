@@ -126,13 +126,17 @@ let gameState = {
 // --- CORE FUNCTIONS ---
 
 // Function to calculate and display the countdown
-// --- FINAL DEFINITIVE DATE CALCULATION BLOCK ---
+function updateCountdown() {
+    
+    // =======================================================
+    // === START: FINAL DEFINITIVE DATE CALCULATION BLOCK ===
+    // =======================================================
 
     // 1. Define Target Date (Use the string for initialization)
     const targetDate = new Date(BIRTHDAY_DATE_STRING); 
     // Set target time to the very start of the day (00:00:00)
     targetDate.setHours(0, 0, 0, 0); 
-
+    
     // 2. Define Today's Date (Set today to the very start of the day)
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
@@ -141,11 +145,20 @@ let gameState = {
     const msDifference = targetDate.getTime() - today.getTime();
     
     // Convert milliseconds to days. 
-    // We use Math.floor() because we only want the full number of *remaining* 24-hour periods.
-    // This ensures the countdown drops by 1 ONLY when today's date changes to tomorrow's date.
+    // This is the core logic: Math.floor() ensures the number only changes at midnight.
     const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
 
-    // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
+    // =======================================================
+    // === END: FINAL DEFINITIVE DATE CALCULATION BLOCK ===
+    // =======================================================
+
+
+    // --- CRITICAL VERIFICATION: This line must be next ---
+    // Update the main number display element
+    document.getElementById('days-remaining').textContent = daysRemaining;
+    
+    // ... (The rest of your function continues below: surpriseSection, if/else logic, etc.) ...
+}
 
 // --- CIPHER GAME LOGIC (ROT13) ---
 
@@ -347,6 +360,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
