@@ -35,6 +35,124 @@
     </div>
 
     <script src="script.js"></script>
+
+    <div id="chat-container">
+        <div id="chat-bubble" onclick="toggleChatPanel()">
+            <span id="unread-badge" class="hidden">0</span>
+            <span>🔔</span> 
+        </div>
+
+        <div id="announcement-panel" class="hidden">
+            <header>Announcements</header>
+            <div id="announcement-list">
+                <p class="placeholder-message">No new announcements today.</p>
+            </div>
+        </div>
+    </div>
+    ```
+
+## 🎨 Step 3: Style the Chat Bubble and Panel (CSS)
+
+Add the following styles to your **`style.css`** to make the bubble fixed, stylish, and ensure the badge is visible.
+
+```css
+/* --- CHAT BUBBLE AND PANEL STYLES --- */
+
+#chat-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000; /* Ensure it floats above all other content */
+}
+
+#chat-bubble {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Perfect circle */
+    background-color: #A36A9F; /* Primary Lavender */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+
+#chat-bubble:hover {
+    transform: scale(1.05);
+}
+
+/* Badge for Unread Count */
+#unread-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #E91E63; /* Use a bright accent color (pink) */
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.7em;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+/* Slide-out Panel */
+#announcement-panel {
+    position: absolute;
+    right: 0;
+    bottom: 80px; /* Position above the bubble */
+    width: 300px;
+    max-height: 400px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(10px);
+}
+
+#announcement-panel header {
+    background-color: #D7BDE2; /* Light Lavender Header */
+    color: #3F3F3F;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+#announcement-list {
+    padding: 15px;
+    max-height: 330px;
+    overflow-y: auto; /* Scrollable list */
+}
+
+.announcement-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.announcement-item.read {
+    opacity: 0.5; /* Dim read messages */
+}
+
+.announcement-item h4 {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+    color: #A36A9F;
+}
+
+.announcement-item p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
 </body>
 
 </html>
+
