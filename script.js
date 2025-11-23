@@ -126,61 +126,26 @@ let gameState = {
 // --- CORE FUNCTIONS ---
 
 // Function to calculate and display the countdown
-function updateCountdown() {
+// --- FINAL DEFINITIVE DATE CALCULATION BLOCK ---
+
+    // 1. Define Target Date (Use the string for initialization)
+    const targetDate = new Date(BIRTHDAY_DATE_STRING); 
+    // Set target time to the very start of the day (00:00:00)
+    targetDate.setHours(0, 0, 0, 0); 
+
+    // 2. Define Today's Date (Set today to the very start of the day)
     const today = new Date();
-    // Month is 0-indexed (11 is December). Set time to midnight UTC.
-    const target = Date.UTC(2025, 11, 18, 0, 0, 0); 
+    today.setHours(0, 0, 0, 0); 
     
     // Calculate difference in milliseconds
-    const msDifference = target - today.getTime();
+    const msDifference = targetDate.getTime() - today.getTime();
     
-    const daysRemaining = Math.ceil(msDifference / (1000 * 60 * 60 * 24));
-    
-    const surpriseSection = document.getElementById('surprise-section');
-    const activitySection = document.getElementById('message-section');
-    
-    // Set the state and run the correct function
-    if (daysRemaining > 0) {
-        document.getElementById('days-remaining').textContent = daysRemaining;
-        
-        // --- Randomly select and display the activity ---
-        const activityChoice = Math.floor(Math.random() * 3); // 0, 1, or 2
-        
-        if (activityChoice === 0) {
-            displayRandomMessage();
-            gameState.activity = 'message';
-        } else if (activityChoice === 1) {
-            displayCipherGame();
-            gameState.activity = 'cipher';
-        } else {
-            displayGuessingGame();
-            gameState.activity = 'guessing';
-        }
+    // Convert milliseconds to days. 
+    // We use Math.floor() because we only want the full number of *remaining* 24-hour periods.
+    // This ensures the countdown drops by 1 ONLY when today's date changes to tomorrow's date.
+    const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
 
-        surpriseSection.style.display = 'none';
-        activitySection.style.display = 'block';
-
-    } else if (daysRemaining <= 0) {
-        // BIRTHDAY MODE (or passed)
-        document.getElementById('main-heading').textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
-        document.getElementById('countdown-text').textContent = 'The celebration is NOW!';
-        document.getElementById('days-remaining').textContent = '0'; 
-        
-        activitySection.style.display = 'none';
-        surpriseSection.style.display = 'block';
-    }
-}
-
-// Function to pick and display a random message
-function displayRandomMessage() {
-    const randomIndex = Math.floor(Math.random() * MESSAGES.length);
-    const activityElement = document.getElementById('message-section');
-    
-    activityElement.innerHTML = `
-        <h2>💌 Your Daily Encouragement:</h2>
-        <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
-    `;
-}
+    // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
 
 // --- CIPHER GAME LOGIC (ROT13) ---
 
@@ -382,6 +347,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
