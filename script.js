@@ -6,7 +6,7 @@ const BIRTHDAY_DATE_STRING = "2025-12-18";
 // --- 1. MESSAGE ARRAY (Full Content) ---
 const MESSAGES = [
     // --- BIBLE VERSES ---
-    "Zephaniah 3:17: 'The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will no longer rebuke you, but will rejoice over you with singing.'",
+    "Zephaniah 3:17: 'The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will no longer rebuke you; but will rejoice over you with singing.'",
     "Jeremiah 29:11: 'For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you, plans to give you hope and a future.'",
     "Philippians 4:13: 'I can do all this through him who gives me strength.'",
     "Isaiah 41:10: 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'",
@@ -127,22 +127,25 @@ let gameState = {
 // Function to calculate and display the countdown
 function updateCountdown() {
     
-    // --- FINAL DEFINITIVE DATE CALCULATION BLOCK (Robust Fix) ---
+    // --- FINAL STABLE DATE CALCULATION BLOCK (Integer Arithmetic) ---
     
-    // 1. Define Target Date using the standard YYYY/MM/DD format (Safest Initialization)
+    // 1. Define Target Date using the string (Safest Initialization)
     const targetDate = new Date(BIRTHDAY_DATE_STRING.replace(/-/g, '/')); 
-    targetDate.setHours(0, 0, 0, 0); 
     
-    // 2. Define Today's Date (Set today to the very start of the day)
+    // 2. Define Today's Date 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
     
-    const msDifference = targetDate.getTime() - today.getTime();
+    // Constant for milliseconds per day
+    const MS_PER_DAY = 1000 * 60 * 60 * 24;
     
-    // Math.floor ensures the number only changes exactly at midnight (25 days remaining today).
-    const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
+    // Convert both dates to integer days since epoch (ignoring time components)
+    const targetDayMs = Math.floor(targetDate.getTime() / MS_PER_DAY);
+    const todayDayMs = Math.floor(today.getTime() / MS_PER_DAY);
 
-    // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
+    // Calculate difference in days (integer result)
+    const daysRemaining = targetDayMs - todayDayMs;
+
+    // --- END FINAL STABLE DATE CALCULATION BLOCK ---
 
     // Update main number display BEFORE the logic starts
     document.getElementById('days-remaining').textContent = daysRemaining;
@@ -384,4 +387,19 @@ function loadAnnouncements() {
     }
 }
 
-// Function to mark
+// Function to mark all current announcements as read
+function markMessagesAsRead() {
+    const today = new Date().toISOString().split('T')[0];
+    const newReadAnnouncements = ANNOUNCEMENTS
+        .filter(ann => ann.date <= today)
+        .map(ann => ann.date);
+    
+    localStorage.setItem('readAnnouncements', JSON.stringify(newReadAnnouncements));
+    loadAnnouncements();
+}
+
+// Initialize the countdown when the page loads
+loadAnnouncements();
+updateCountdown();
+// Update the countdown every minute
+setInterval(updateCountdown, 1000 * 60);
