@@ -124,86 +124,6 @@ let gameState = {
 
 // --- CORE FUNCTIONS ---
 
-// Function to calculate and display the countdown
-function updateCountdown() {
-    
-    // --- FINAL DEFINITIVE DATE CALCULATION BLOCK (Midnight Fix) ---
-    
-    const [year, month, day] = BIRTHDAY_DATE_STRING.split('-').map(Number);
-    const targetDate = new Date(year, month - 1, day); 
-    targetDate.setHours(0, 0, 0, 0); 
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); 
-    
-    const msDifference = targetDate.getTime() - today.getTime();
-    
-    // Math.floor ensures the number only changes exactly at midnight.
-    const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
-
-    // --- END FINAL DEFINITIVE DATE CALCULATION BLOCK ---
-
-    // Update main number display BEFORE the logic starts
-    document.getElementById('days-remaining').textContent = daysRemaining;
-    
-    const surpriseSection = document.getElementById('surprise-section');
-    const activitySection = document.getElementById('message-section');
-
-    if (daysRemaining > 0) {
-        
-        // --- COUNTDOWN MODE ---
-        
-        // 1. Reset display elements for COUNTDOWN MODE
-        document.getElementById('main-heading').textContent = "Birthday Countdown";
-        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
-        surpriseSection.style.display = 'none';
-        activitySection.style.display = 'block';
-
-        // 2. ROBUST ACTIVITY SELECTION WITH TRY-CATCH FALLBACK
-        try {
-            const activityChoice = Math.floor(Math.random() * 3); 
-            
-            if (activityChoice === 0) {
-                displayRandomMessage();
-            } else if (activityChoice === 1) {
-                displayCipherGame();
-            } else {
-                displayGuessingGame();
-            }
-        } catch (error) {
-            // FALLBACK: If any activity function fails, display the reliable Random Message.
-            displayRandomMessage();
-            console.error("Activity selection failed. Showing fallback message:", error);
-        }
-
-    } else if (daysRemaining === 0) {
-        
-        // --- IT'S THE BIRTHDAY! ---
-        document.getElementById('main-heading').textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
-        document.getElementById('countdown-text').textContent = 'The celebration is NOW!';
-        document.getElementById('days-remaining').textContent = '0'; 
-        
-        generateQRCode(); 
-        
-        activitySection.style.display = 'none';
-        surpriseSection.style.display = 'block';
-
-    } else if (daysRemaining < 0) {
-        
-        // --- BIRTHDAY HAS PASSED ---
-        const daysAgo = Math.abs(daysRemaining); 
-        
-        document.getElementById('main-heading').textContent = `Birthday Has Passed`;
-        document.getElementById('countdown-text').textContent = `The birthday was ${daysAgo} days ago.`;
-        document.getElementById('days-remaining').textContent = `—`; 
-        
-        // Display a random message for continued engagement
-        activitySection.style.display = 'block';
-        surpriseSection.style.display = 'none';
-        displayRandomMessage();
-    }
-}
-
 // Function to pick and display a random message
 function displayRandomMessage() {
     const randomIndex = Math.floor(Math.random() * MESSAGES.length);
@@ -408,3 +328,4 @@ loadAnnouncements(); // Initialize the chat bubble and badge
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
+
