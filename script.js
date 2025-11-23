@@ -1,3 +1,28 @@
+// --- NEW: ANNOUNCEMENT DATA ---
+const ANNOUNCEMENTS = [
+    { 
+        date: "2025-11-23", // YYYY-MM-DD format
+        title: "Welcome to the Countdown!", 
+        message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
+    },
+    { 
+        date: "2025-12-06", 
+        title: "🎁 December 6th Surprise Alert!", 
+        message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
+    },
+    { 
+        date: "2025-12-12", 
+        title: "🎬 Video Reminder!", 
+        message: "Just a reminder about the birthday video—make sure it's ready!" 
+    },
+    { 
+        date: "2025-12-20", 
+        title: "✈️ Jeju Spa & Christmas Canteen!", 
+        message: "The post-birthday events are today! Have a wonderful time!" 
+    }
+];
+// ----------------------------------
+
 // --- CONFIGURATION ---
 const BIRTHDAY_PERSON = "Sheena";
 // IMPORTANT: Keep this date accurate for the calculation (YYYY-MM-DD)
@@ -23,7 +48,7 @@ const MESSAGES = [
     "Lamentations 3:22-23: 'Because of the Lord’s great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.'",
     "John 16:33: 'I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.'",
     "Psalm 27:1: 'The Lord is my light and my salvation—whom shall I fear? The Lord is the stronghold of my life—of whom shall I be afraid?'",
-    "Galatians 6:9: 'Let us not become weary in doing good, for at the proper time we will reap a harvest if we will not give up.'",
+    "Galatians 6:9: 'Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.'",
     "Psalm 121:1-2: 'I lift up my eyes to the mountains—where does my help come from? My help comes from the Lord, the Maker of heaven and earth.'",
     "Colossians 3:23: 'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'",
     
@@ -31,13 +56,13 @@ const MESSAGES = [
     "Remember that time we walked Stone Mountain in the AM. I started to walk ahead in an attempt to encourage you. Little did I know. I'll never forget your solemn expression. First time I'd encountered upset Sheena. Awkward moment but it built our friendship.",
     "I'm so thankful for the day we met at Blueprint Stone Mountain. I knew we'd be great friends when started our morning Stone Mountain walks and that led to us doing a 7 day water fast...the rest is history.😁",
     "I love our friendship. One of my most cherished moments is when we went out to the playground with Zachariah in the Avana 29 apartment complex. I think we played tag and climbed the monkey bars. He was 4 or 5 years old at the time.",
-    "Just thinking about all our food runs: Whole Foods - Bangkok Street Food - Maple Street Biscuit Company - Dekalb Farmers Market - Okiboru Ramen - Ramen Gallery - Wally World - Publix - Popshelf - Just name a few. 😋",
+    "Just thinking about all our food runs: Whole Foods - Bangkok Street Food - Maple Street Biscuit Company - Dekalb Farmers Market - Okiboru Ramen - Ramen Gallery - Wally World - Publix - Popshelf - Just to name a few. 😋",
     "Thank you for being the kind of friend to: Sit in total slience with - Be ever on mission for Jesus Christ! - Have gut bursting laughter with - Challenge me even when I don't feel like it - Encourage my days of anger, happiness, joy, sorrow, and grief with sober relevant words reflecting christ-like character - Out do me in servant hood...etc.💓",
     "I'm over joyed to be walking through this season of life with you KP! Lets GOOOOOOOOOO!💪🏾😁",
     "I've always admired your unwavering patience. I see the fruit of the spirit in you!",
     "KP my friend your obedience and faithfullness to our Lord point me back to Jesus. Even when your unfaithful and disobedient. Praise Yah for us being blood brought!🩸🧼",
     "That criss cross referency brain of yours is autographed by the Great I Am! Don't change a single neuron or synapse, unless of course its going to renew your mind for the glory of Abba!🧠",
-    "Every gift is from above. YOU are a gift from above....and your love for YOU in all the best ways!",
+    "Every gift is from above. YOU are a gift from above....and you are loved for YOU, in all the best ways!",
     "Thank you for always being the redeemed Sheena I've come to know and continue to learn and grow beside.",
     "My favorite quality about is your enormous meticulous compassionate heart for others expressed in mind, speech, and deed.🥰",
     "You inspire me, the kiddos, momma Stacey, and so many more in your circle of influence. I've seen you overcome trials with Waffle House Corporate, family matters, Covid-19👀, Church closing, financial burdens, housing transitions...furture trials by God's grace. May your character in Christ be strengthened through the power of His holy spirit.💪🏾",
@@ -63,7 +88,7 @@ const RIDDLES_ENCODED = [
     "V nz gur pbybe bs eblnygl, n zvk bs cnffvba'f erq naq pnyz frn oyhr. Jung nz V?",
     "V nz bar yrff guna sbegl'f pbhag, guerr gvzrf guvegrra vf zl nzbhag. Jung ahzore nz V?",
     "V'z n Puevfgvna enccre jub oevatf gur urng, jvgu \"Ob Eneqv\" naq \"Unccl\" orngf. Jub nz V?",
-    "V jnf n cebcurg, zhgr sbe n gvzr, gur sngure bs n Oncgvfg fhoyzmzr. Jub nz V?",
+    "V jnf n cebcurg, zhgr sbe n gvzr, gur sngure bs n Oncgvfg fhoyvzr. Jub nz V?",
     "V'z n ehaavat fubr gung urycf lbh syl, anzrq sbe gur jvatrq ubefv va gur fxl. Jung nz V?",
     "Zl anzr vf whfg gjb yrggref, fubeg naq fjrfg. \"X\" vf gur svefg, \"C\" znxrf vg pbzcygrgr. Jub nz V?",
     "V nz jub lbh ner guebhtu snvgu naq tenpr, nqbcgrq va n ubyl cynpr. Jung nz V?",
@@ -90,31 +115,7 @@ const ANSWERS_DECODED = [
     "theraflu",
 ];
 
-// --- 3. ANNOUNCEMENT DATA (For Chat Bubble) ---
-const ANNOUNCEMENTS = [
-    { 
-        date: "2025-11-23", // YYYY-MM-DD format (Current date)
-        title: "Welcome to the Countdown!", 
-        message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
-    },
-    { 
-        date: "2025-12-06", 
-        title: "🎁 December 6th Surprise Alert!", 
-        message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
-    },
-    { 
-        date: "2025-12-12", 
-        title: "🎬 Video Reminder!", 
-        message: "Make sure the Birthday Video is finalized and ready to share! You're almost there!" 
-    },
-    { 
-        date: "2025-12-20", 
-        title: "✈️ Jeju Spa & Christmas Canteen!", 
-        message: "The post-birthday events are today! Have a wonderful time!" 
-    }
-];
-
-// --- 4. GAME STATE VARIABLES ---
+// --- GAME STATE VARIABLES ---
 let gameState = {
     activity: 'message', 
     secretNumber: 0,
@@ -124,11 +125,98 @@ let gameState = {
 
 // --- CORE FUNCTIONS ---
 
+// Function to calculate and display the countdown
+function updateCountdown() {
+    
+    // --- FINAL CORRECTED DATE CALCULATION BLOCK ---
+
+    // 1. Define Target Date (Use the string for initialization)
+    const targetDate = new Date(BIRTHDAY_DATE_STRING); 
+    
+    // Set target date to midnight (00:00:00)
+    targetDate.setHours(0, 0, 0, 0); 
+    
+    // Advance the target date by 1 day to ensure the calculation yields the correct number
+    targetDate.setDate(targetDate.getDate() + 1);
+
+    // 2. Define Today's Date (Set today to midnight)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); 
+    
+    // Calculate difference in milliseconds
+    const msDifference = targetDate.getTime() - today.getTime();
+    
+    // Convert milliseconds to days and use Math.floor to ensure we count full 24h periods
+    // Subtracting 1 day from the result accounts for the day we added to the target date.
+    const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24)) - 1;
+
+    // --- END FINAL CORRECTED DATE CALCULATION BLOCK ---
+
+    // Update main number display BEFORE the logic starts
+    document.getElementById('days-remaining').textContent = daysRemaining;
+    
+    const surpriseSection = document.getElementById('surprise-section');
+    const activitySection = document.getElementById('message-section');
+
+    if (daysRemaining > 0) {
+        
+        // --- COUNTDOWN MODE ---
+        
+        // 1. Reset display elements for COUNTDOWN MODE
+        document.getElementById('main-heading').textContent = "Birthday Countdown";
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
+        surpriseSection.style.display = 'none';
+        activitySection.style.display = 'block';
+
+        // 2. Randomly select and display the daily activity
+        const activityChoice = Math.floor(Math.random() * 3); 
+        
+        if (activityChoice === 0) {
+            displayRandomMessage();
+        } else if (activityChoice === 1) {
+            displayCipherGame();
+        } else {
+            displayGuessingGame();
+        }
+
+    } else if (daysRemaining === 0) {
+        
+        // --- IT'S THE BIRTHDAY! ---
+        document.getElementById('main-heading').textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
+        document.getElementById('countdown-text').textContent = 'The celebration is NOW!';
+        document.getElementById('days-remaining').textContent = '0'; 
+        
+        // Ensure the birthday logic runs:
+        generateQRCode(); 
+        
+        activitySection.style.display = 'none';
+        surpriseSection.style.display = 'block';
+
+    } else if (daysRemaining < 0) {
+        
+        // --- BIRTHDAY HAS PASSED ---
+        const daysAgo = Math.abs(daysRemaining); 
+        
+        document.getElementById('main-heading').textContent = `Birthday Has Passed`;
+        document.getElementById('countdown-text').textContent = `The birthday was ${daysAgo} days ago.`;
+        document.getElementById('days-remaining').textContent = `—`; 
+        
+        // Display a random message for continued engagement
+        activitySection.style.display = 'block';
+        surpriseSection.style.display = 'none';
+        displayRandomMessage();
+    }
+}
+
 // Function to pick and display a random message
 function displayRandomMessage() {
+    // Selects a random index based on the length of the global MESSAGES array
     const randomIndex = Math.floor(Math.random() * MESSAGES.length);
-    const activityElement = document.getElementById('message-section');
     
+    // Gets the dedicated HTML container for activities
+    const activityElement = document.getElementById('message-section'); 
+    
+    // Overwrites the inner HTML with the new content
     activityElement.innerHTML = `
         <h2>💌 Your Daily Encouragement:</h2>
         <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
@@ -145,6 +233,11 @@ function displayCipherGame() {
     activityElement.innerHTML = `
         <h2>🔒 ROT13 Cipher Challenge!</h2>
         <p class="instruction">Decode the riddle below. (Hint: Each letter is shifted 13 places.)</p>
+        
+        <p class="hint-text">
+            Stuck? Use this online tool: 
+            <a href="https://rot13.com/" target="_blank">ROT13 Decoder</a>
+        </p>
         <p class="riddle-box">${RIDDLES_ENCODED[randomIndex]}</p>
         <div class="input-group">
             <input type="text" id="cipher-input" placeholder="Your answer...">
@@ -246,6 +339,10 @@ function generateQRCode() {
     document.getElementById('birthday-message-text').textContent = "Scan the code above to open your special digital birthday card!";
 }
 
+// Initialize the countdown when the page loads
+updateCountdown();
+// Update the countdown every minute
+
 // --- JAVASCRIPT LOGIC FOR CHAT BUBBLE & BADGE ---
 
 // Function to toggle the chat panel visibility
@@ -264,11 +361,9 @@ function toggleChatPanel() {
 
 // Function to load announcements and calculate the badge count
 function loadAnnouncements() {
-    const today = new Date().toISOString().split('T')[0]; // Gets today as YYYY-MM-DD
+    const today = new Date().toISOString().split('T')[0];
     const listElement = document.getElementById('announcement-list');
     const badgeElement = document.getElementById('unread-badge');
-    
-    // Retrieve read status from local storage
     const readAnnouncements = JSON.parse(localStorage.getItem('readAnnouncements') || '[]');
     let unreadCount = 0;
     let listHTML = '';
@@ -282,10 +377,10 @@ function loadAnnouncements() {
         return;
     }
 
-    // Build the list HTML
     activeAnnouncements.reverse().forEach(ann => {
         const isRead = readAnnouncements.includes(ann.date);
         
+        // Build the HTML for the announcement item
         listHTML += `
             <div class="announcement-item ${isRead ? 'read' : ''}" data-date="${ann.date}">
                 <h4>${ann.title}</h4>
@@ -323,9 +418,22 @@ function markMessagesAsRead() {
     loadAnnouncements();
 }
 
-// Initialize the countdown when the page loads
-loadAnnouncements(); // Initialize the chat bubble and badge
-updateCountdown();
-// Update the countdown every minute
+// --- CALL THIS FUNCTION AT THE END OF YOUR SCRIPT ---
+loadAnnouncements();
+// ---------------------------------------------------
+
 setInterval(updateCountdown, 1000 * 60);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
