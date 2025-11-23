@@ -37,7 +37,7 @@ const MESSAGES = [
     "I've always admired your unwavering patience. I see the fruit of the spirit in you!",
     "KP my friend your obedience and faithfullness to our Lord point me back to Jesus. Even when your unfaithful and disobedient. Praise Yah for us being blood brought!🩸🧼",
     "That criss cross referency brain of yours is autographed by the Great I Am! Don't change a single neuron or synapse, unless of course its going to renew your mind for the glory of Abba!🧠",
-    "Every gift is from above. YOU are a gift from above....and your love for YOU in all the best ways!",
+    "Every gift is from above. YOU are a gift from above....and you are loved for YOU, in all the best ways!",
     "Thank you for always being the redeemed Sheena I've come to know and continue to learn and grow beside.",
     "My favorite quality about is your enormous meticulous compassionate heart for others expressed in mind, speech, and deed.🥰",
     "You inspire me, the kiddos, momma Stacey, and so many more in your circle of influence. I've seen you overcome trials with Waffle House Corporate, family matters, Covid-19👀, Church closing, financial burdens, housing transitions...furture trials by God's grace. May your character in Christ be strengthened through the power of His holy spirit.💪🏾",
@@ -278,3 +278,4 @@ updateCountdown();
 // Update the countdown every minute
 
 setInterval(updateCountdown, 1000 * 60);
+
