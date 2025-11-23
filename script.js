@@ -159,7 +159,7 @@ function updateCountdown() {
         
         // 1. Reset display elements for COUNTDOWN MODE
         document.getElementById('main-heading').textContent = "Birthday Countdown";
-        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
+        document.getElementById('countdown-text').textContent = `I broke the countdown. Repair in progress...😁. Love you ${BIRTHDAY_PERSON}!`;
         surpriseSection.style.display = 'none';
         activitySection.style.display = 'block';
 
