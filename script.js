@@ -129,35 +129,101 @@ let gameState = {
 function updateCountdown() {
     
     // =======================================================
-    // === START: FINAL DEFINITIVE DATE CALCULATION BLOCK ===
+    // === FINAL DEFINITIVE DATE CALCULATION BLOCK (Midnight Fix) ===
     // =======================================================
 
-    // 1. Define Target Date (Use the string for initialization)
-    const targetDate = new Date(BIRTHDAY_DATE_STRING); 
-    // Set target time to the very start of the day (00:00:00)
+    // Get components from the string
+    const [year, month, day] = BIRTHDAY_DATE_STRING.split('-').map(Number);
+    
+    // 1. Define Target Date (Set to the very start of the day: 00:00:00)
+    const targetDate = new Date(year, month - 1, day); // Month is 0-indexed in JS
     targetDate.setHours(0, 0, 0, 0); 
     
-    // 2. Define Today's Date (Set today to the very start of the day)
+    // 2. Define Today's Date (Set today to the very start of the day: 00:00:00)
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
     
     // Calculate difference in milliseconds
     const msDifference = targetDate.getTime() - today.getTime();
     
-    // Convert milliseconds to days. 
-    // This is the core logic: Math.floor() ensures the number only changes at midnight.
+    // Convert milliseconds to days. Math.floor ensures the number only changes at midnight.
     const daysRemaining = Math.floor(msDifference / (1000 * 60 * 60 * 24));
 
     // =======================================================
-    // === END: FINAL DEFINITIVE DATE CALCULATION BLOCK ===
+    // === END DATE CALCULATION BLOCK ===
     // =======================================================
 
 
-    // --- CRITICAL VERIFICATION: This line must be next ---
-    // Update the main number display element
+    // Update main heading and countdown number
     document.getElementById('days-remaining').textContent = daysRemaining;
     
-    // ... (The rest of your function continues below: surpriseSection, if/else logic, etc.) ...
+    const surpriseSection = document.getElementById('surprise-section');
+    const activitySection = document.getElementById('message-section');
+
+    if (daysRemaining > 0) {
+        
+        // --- Randomly select and display the activity (0, 1, or 2) ---
+        const activityChoice = Math.floor(Math.random() * 3); 
+        
+        if (activityChoice === 0) {
+            displayRandomMessage();
+        } else if (activityChoice === 1) {
+            displayCipherGame();
+        } else {
+            displayGuessingGame();
+        }
+
+        document.getElementById('main-heading').textContent = "Birthday Countdown";
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
+        surpriseSection.style.display = 'none';
+        activitySection.style.display = 'block';
+
+    } else if (daysRemaining === 0) {
+        // --- IT'S THE BIRTHDAY! ---
+        document.getElementById('main-heading').textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
+        document.getElementById('countdown-text').textContent = 'The celebration is NOW!';
+        document.getElementById('days-remaining').textContent = '0'; // Display 0 cleanly
+        
+        // This is where the birthday surprise is called
+        generateQRCode(); 
+        sendBirthdayReminder(); // Ensure this is run on the birthday
+        
+        activitySection.style.display = 'none';
+        surpriseSection.style.display = 'block';
+
+    } else if (daysRemaining < 0) {
+        // --- BIRTHDAY HAS PASSED ---
+        // Display absolute value of days
+        const daysAgo = Math.abs(daysRemaining); 
+        
+        document.getElementById('main-heading').textContent = `Birthday Has Passed`;
+        document.getElementById('countdown-text').textContent = `The birthday was ${daysAgo} days ago.`;
+        document.getElementById('days-remaining').textContent = `—`; // Placeholder dash
+        
+        // Still run a message for reflection
+        activitySection.style.display = 'block';
+        surpriseSection.style.display = 'none';
+        displayRandomMessage();
+    }
+    
+    // Ensure specific date reminders are checked every time the page loads
+    sendSpecificReminder(
+        SURPRISE_REMINDER_DATE, 
+        "🗓️ DECEMBER 6TH: Countdown Alert!", 
+        "Only 12 days left until the Birthday Surprise! Are you ready?"
+    );
+    
+    sendSpecificReminder(
+        VIDEO_REMINDER_DATE, 
+        "🎬 DECEMBER 12TH: Video Surprise Check!", 
+        "Make sure the Birthday Video is finalized and ready to share! You're almost there!"
+    );
+    
+    sendSpecificReminder(
+        EVENT_REMINDER_DATE, 
+        "🎊 DECEMBER 20TH: Post-Birthday Events!", 
+        "Today is the Jeju Spa & Christmas Canteen with the fam! Enjoy the celebration!"
+    );
 }
 
 // --- CIPHER GAME LOGIC (ROT13) ---
@@ -360,6 +426,7 @@ loadAnnouncements();
 // ---------------------------------------------------
 
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
