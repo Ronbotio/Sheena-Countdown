@@ -129,115 +129,6 @@ let gameState = {
 
 // --- CORE FUNCTIONS ---
 
-// Function to calculate and display the countdown status
-function updateCountdown() {
-    
-    // 1. FINAL STABLE DATE CALCULATION (Integer Arithmetic)
-    const targetDate = new Date(BIRTHDAY_DATE_STRING.replace(/-/g, '/')); 
-    const today = new Date();
-    
-    const MS_PER_DAY = 1000 * 60 * 60 * 24;
-    const targetDayMs = Math.floor(targetDate.getTime() / MS_PER_DAY);
-    const todayDayMs = Math.floor(today.getTime() / MS_PER_DAY);
-    const daysRemaining = targetDayMs - todayDayMs;
-
-    // --- MILESTONE LOGIC ---
-    
-    const statusIcon = document.getElementById('status-icon');
-    const statusMessage = document.getElementById('status-message');
-    const daysLeftText = document.getElementById('days-left-text');
-    const surpriseSection = document.getElementById('surprise-section');
-    const activitySection = document.getElementById('message-section');
-    
-    // --- Determine Display State ---
-
-    if (daysRemaining === 0) {
-        // --- IT'S THE BIRTHDAY! (Highest Priority) ---
-        
-        statusIcon.textContent = '🎂';
-        statusIcon.classList.add('birthday-active'); // Add CSS class for color/size change
-        statusMessage.textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
-        daysLeftText.textContent = "THE CELEBRATION IS NOW!";
-        
-        generateQRCode(); 
-        activitySection.style.display = 'none';
-        surpriseSection.style.display = 'block';
-
-    } else if (daysRemaining === 12) {
-        // --- DECEMBER 6TH: SURPRISE MILESTONE ---
-        
-        statusIcon.textContent = '🎁';
-        statusMessage.textContent = `12 DAYS LEFT: First Surprise Coming Soon!`;
-        daysLeftText.textContent = `Keep checking the site! ${daysRemaining} days remaining.`;
-        
-        activitySection.style.display = 'block';
-        surpriseSection.style.display = 'none';
-        displayRandomMessage();
-
-    } else if (daysRemaining > 0) {
-        
-        // --- COUNTDOWN MODE (Default) ---
-        
-        statusIcon.textContent = '🗓️';
-        statusIcon.classList.remove('birthday-active');
-        statusMessage.textContent = `Progressing nicely!`;
-        daysLeftText.textContent = `${daysRemaining} days left until the big day.`;
-        
-        activitySection.style.display = 'block';
-        surpriseSection.style.display = 'none';
-
-        // 2. ROBUST ACTIVITY SELECTION (Try-Catch is used)
-        try {
-            const activityChoice = Math.floor(Math.random() * 3); 
-            if (activityChoice === 0) { displayRandomMessage(); } 
-            else if (activityChoice === 1) { displayCipherGame(); } 
-            else { displayGuessingGame(); }
-        } catch (error) {
-            displayRandomMessage();
-            console.error("Activity selection failed. Showing fallback message:", error);
-        }
-
-    } else if (daysRemaining < 0) {
-        
-        // --- BIRTHDAY HAS PASSED ---
-        const daysAgo = Math.abs(daysRemaining); 
-        statusIcon.textContent = '✅';
-        statusMessage.textContent = `Birthday Has Passed!`;
-        daysLeftText.textContent = `The birthday was ${daysAgo} days ago.`;
-        
-        activitySection.style.display = 'block';
-        surpriseSection.style.display = 'none';
-        displayRandomMessage();
-    }
-}
-    } else if (daysRemaining === 0) {
-        
-        // --- IT'S THE BIRTHDAY! ---
-        document.getElementById('main-heading').textContent = `🎉 HAPPY BIRTHDAY, ${BIRTHDAY_PERSON}! 🎉`;
-        document.getElementById('countdown-text').textContent = 'The celebration is NOW!';
-        document.getElementById('days-remaining').textContent = '0'; 
-        
-        generateQRCode(); 
-        
-        activitySection.style.display = 'none';
-        surpriseSection.style.display = 'block';
-
-    } else if (daysRemaining < 0) {
-        
-        // --- BIRTHDAY HAS PASSED ---
-        const daysAgo = Math.abs(daysRemaining); 
-        
-        document.getElementById('main-heading').textContent = `Birthday Has Passed`;
-        document.getElementById('countdown-text').textContent = `The birthday was ${daysAgo} days ago.`;
-        document.getElementById('days-remaining').textContent = `—`; 
-        
-        // Display a random message for continued engagement
-        activitySection.style.display = 'block';
-        surpriseSection.style.display = 'none';
-        displayRandomMessage();
-    }
-}
-
 // Function to pick and display a random message
 function displayRandomMessage() {
     const randomIndex = Math.floor(Math.random() * MESSAGES.length);
@@ -438,6 +329,7 @@ loadAnnouncements();
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
+
 
 
 
