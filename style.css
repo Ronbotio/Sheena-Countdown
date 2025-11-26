@@ -281,6 +281,7 @@ button:hover {
 
 .announcement-item.read {
     opacity: 0.5; 
+   background-color: #FAFAFA; /* Keeps background very light */
 }
 
 .announcement-item h4 {
@@ -315,3 +316,17 @@ button:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Add this new animation keyframe */
+@keyframes shake-and-pulse {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-1px, 1px) scale(1.05); }
+    40% { transform: translate(1px, -1px); }
+    60% { transform: translate(-1px, 1px) scale(1.05); }
+    80% { transform: translate(1px, -1px); }
+}
+
+/* Apply the animation when unread messages are present */
+#chat-bubble:not(.hidden) {
+    /* Apply only if the panel is closed and badge is visible */
+    animation: shake-and-pulse 4s ease-out infinite; 
+}
