@@ -287,11 +287,13 @@ button:hover {
     margin: 0 0 5px 0;
     font-size: 1em;
     color: #5D9CEC; 
+   font-weight: 700; /* Use 700 or bold */
 }
 
 .announcement-item p {
     margin: 0;
     font-size: 0.9em;
+   font-weight: 500; /* Use 500 or 600 for a semi-bold look */
 }
 
 /* ---------------------------------- */
@@ -312,3 +314,4 @@ button:hover {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
