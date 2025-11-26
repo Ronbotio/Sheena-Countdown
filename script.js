@@ -1,3 +1,6 @@
+// Add to the top of script.js:
+const FUN_EMOJIS = ['✨', '💖', '🎁', '🎈', '🍰', '👑', '🌟'];
+
 // --- CONFIGURATION ---
 const BIRTHDAY_PERSON = "Sheena";
 // We keep the date string for use in ANNOUNCEMENTS but remove calculation logic
@@ -163,7 +166,7 @@ function displayRandomMessage() {
     if (activityElement) { // Safety check
         // Change this line in displayRandomMessage():
 activityElement.innerHTML = `
-    <h2>💌 A Special Word for ${BIRTHDAY_PERSON}:</h2>
+    <h2>${FUN_EMOJIS[Math.floor(Math.random() * FUN_EMOJIS.length)]} A Special Word for ${BIRTHDAY_PERSON}:</h2>
     <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
 `;
     }
@@ -386,6 +389,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
