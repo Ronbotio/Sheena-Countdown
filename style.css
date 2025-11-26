@@ -348,11 +348,6 @@ button:hover {
 
 
 
-/* Add this new keyframe to the 'Custom Animations' section in style.css */
-@keyframes emoji-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 
 
