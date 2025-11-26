@@ -287,7 +287,7 @@ button:hover {
 .announcement-item h4 {
     margin: 0 0 5px 0;
     font-size: 1em;
-    color: #5D9CEC; 
+    color: #2A52BE; 
    font-weight: bold; /* Use 700 or bold */
 }
 
@@ -330,4 +330,5 @@ button:hover {
     /* Apply only if the panel is closed and badge is visible */
     animation: shake-and-pulse 4s ease-out infinite; 
 }
+
 
