@@ -62,4 +62,296 @@ const RIDDLES_ENCODED = [
     "V sel jvgu abguvat ohg n thfg, znxvat sbbq pevic jvgu n tbyqra pehfg. Jung nz V?",
     "V nz gur pbybe bs eblnygl, n zvk bs cnffvba'f erq naq pnyz frn oyhr. Jung nz V?",
     "V nz bar yrff guna sbegl'f pbhag, guerr gvzmf guvegrra vf zl nzbhag. Jung ahzure nz V?",
-    "V'z n Puevfgvna enccre jub o
+    "V'z n Puevfgvna enccre jub oevatf gur urng, jvgu \"Ob Eneqv\" naq \"Unccl\" orngf. Jub nz V?",
+    "V jnf n cebcurg, zhgr sbe n gvzr, gur sngure bs n Oncgvfg fhoyzmzr. Jub nz V?",
+    "V'z n ehaavat fubr gung urycf lbh syl, anzrq sbe gur jvatrq ubefv va gur fxl. Jung nz V?",
+    "Zl anzr vf whfg gjb yrggref, fubeg naq fjrfg. \"X\" vf gur svefg, \"C\" znxrf vg pbzcygrgr. Jub nz V?",
+    "V nz jub lbh ner guebhtu snvgu naq tenpr, nqbcgrq va n ubyl cynpr. Jung nz V?",
+    "V nz qehzf naq syngf, gbffrq va fnhpr, n zrffl gerng gung'f jbegu gur pbfg. Jung nz V?",
+    "V nz n obql, n ubyl cynpr, ohvyg ba \"Tbfcry Arjf\" naq fnivat tenpr. Jung nz V?",
+    "V nz n cbjqre lbh qevax jura ubg, gb svtug gur pbyq naq syh lbh'r tbg. Jung nz V?",
+];
+const ANSWERS_DECODED = [
+    "a map",
+    "ramen",
+    "quiet riot",
+    "my fair lady",
+    "naan bread",
+    "air fryer",
+    "purple",
+    "39",
+    "torey d'shaun",
+    "zachariah",
+    "nike pegasus",
+    "kp",
+    "child of god",
+    "chicken wings",
+    "gospel hope church",
+    "theraflu",
+];
+
+// --- 3. ANNOUNCEMENT DATA (For Chat Bubble) ---
+const ANNOUNCEMENTS = [
+    { 
+        date: "2025-11-23", // YYYY-MM-DD format (Current date)
+        title: "🔔 TEST: New Badge Alert!", 
+        message: "This is a test to verify the unread badge and local storage are working correctly." 
+    },
+    { 
+        date: "2025-11-23", 
+        title: "Welcome to the Countdown!", 
+        message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
+    },
+    { 
+        date: "2025-12-06", 
+        title: "🎁 December 6th Surprise Alert!", 
+        message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
+    },
+    { 
+        date: "2025-12-12", 
+        title: "🎬 Video Reminder!", 
+        message: "Make sure the Birthday Video is finalized and ready to share! You're almost there!" 
+    },
+    { 
+        date: "2025-12-20", 
+        title: "✈️ Jeju Spa & Christmas Canteen!", 
+        message: "The post-birthday events are today! Have a wonderful time!" 
+    }
+];
+
+// --- 4. GAME STATE VARIABLES ---
+let gameState = {
+    activity: 'message', 
+    secretNumber: 0,
+    guessCount: 0,
+    maxGuesses: 5
+};
+
+// --- MAIN FUNCTION: NO COUNTDOWN ---
+
+function initializeDailyContent() {
+    
+    // --- 1. REMOVE OBSOLETE COUNTDOWN ELEMENTS (Visually hide them) ---
+    // If you haven't removed the countdown elements from HTML, hide them here:
+    // const progressContainer = document.getElementById('progress-container');
+    // if (progressContainer) { progressContainer.style.display = 'none'; }
+
+
+    const activitySection = document.getElementById('message-section');
+    const surpriseSection = document.getElementById('surprise-section');
+
+    // 2. SET PAGE HEADER
+    document.getElementById('main-heading').textContent = `Daily Encouragement & Activities`;
+    
+    // Hide the surprise section (only visible on birthday, which we removed)
+    surpriseSection.style.display = 'none'; 
+    activitySection.style.display = 'block';
+
+    // 3. ROBUST ACTIVITY SELECTION (Always run a random activity)
+    try {
+        const activityChoice = Math.floor(Math.random() * 3); 
+        
+        if (activityChoice === 0) {
+            displayRandomMessage();
+        } else if (activityChoice === 1) {
+            displayCipherGame();
+        } else {
+            displayGuessingGame();
+        }
+    } catch (error) {
+        // FALLBACK: If any activity function fails, display the reliable Random Message.
+        displayRandomMessage();
+        console.error("Activity selection failed. Showing fallback message:", error);
+    }
+}
+
+// Function to pick and display a random message
+function displayRandomMessage() {
+    const randomIndex = Math.floor(Math.random() * MESSAGES.length);
+    const activityElement = document.getElementById('message-section');
+    
+    if (activityElement) { // Safety check
+        activityElement.innerHTML = `
+            <h2>💌 Your Daily Encouragement:</h2>
+            <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
+        `;
+    }
+}
+
+// --- CIPHER GAME LOGIC (ROT13) ---
+
+function displayCipherGame() {
+    const randomIndex = Math.floor(Math.random() * RIDDLES_ENCODED.length);
+    gameState.cipherAnswer = ANSWERS_DECODED[randomIndex];
+
+    const activityElement = document.getElementById('message-section');
+    activityElement.innerHTML = `
+        <h2>🔒 ROT13 Cipher Challenge!</h2>
+        <p class="instruction">Decode the riddle below. (Hint: Each letter is shifted 13 places.)</p>
+        <p class="riddle-box">${RIDDLES_ENCODED[randomIndex]}</p>
+        <div class="input-group">
+            <input type="text" id="cipher-input" placeholder="Your answer...">
+            <button onclick="checkCipherAnswer()">Submit</button>
+        </div>
+        <p id="cipher-feedback"></p>
+    `;
+}
+
+function checkCipherAnswer() {
+    const userInput = document.getElementById('cipher-input').value.toLowerCase().trim();
+    const feedback = document.getElementById('cipher-feedback');
+    
+    if (userInput === gameState.cipherAnswer) {
+        feedback.className = 'feedback-success';
+        feedback.innerHTML = `🎉 **You got it!** The answer is **"${gameState.cipherAnswer}"**. Well done!`;
+        document.querySelector('#message-section button').disabled = true;
+    } else {
+        feedback.className = 'feedback-fail';
+        feedback.innerHTML = `😥 Not quite! Keep trying or use an online ROT13 tool!`;
+    }
+}
+
+
+// --- GUESSING GAME LOGIC ---
+
+function displayGuessingGame() {
+    // Generate a new secret number between 1 and 50
+    gameState.secretNumber = Math.floor(Math.random() * 50) + 1;
+    gameState.guessCount = 0;
+    
+    const activityElement = document.getElementById('message-section');
+    activityElement.innerHTML = `
+        <h2>🎲 Guess the Number!</h2>
+        <p class="instruction">I'm thinking of a number between 1 and 50. You have ${gameState.maxGuesses} tries.</p>
+        <div class="input-group">
+            <input type="number" id="guess-input" placeholder="Enter your guess (1-50)">
+            <button onclick="checkGuess()">Guess</button>
+        </div>
+        <p id="guess-feedback"></p>
+        <p id="tries-left">Tries left: ${gameState.maxGuesses}</p>
+    `;
+}
+
+function checkGuess() {
+    const userInput = parseInt(document.getElementById('guess-input').value);
+    const feedback = document.getElementById('guess-feedback');
+    const triesLeftElement = document.getElementById('tries-left');
+    
+    if (isNaN(userInput) || userInput < 1 || userInput > 50) {
+        feedback.className = 'feedback-fail';
+        feedback.textContent = "Please enter a valid number between 1 and 50.";
+        return;
+    }
+    
+    gameState.guessCount++;
+    const remaining = gameState.maxGuesses - gameState.guessCount;
+    triesLeftElement.textContent = `Tries left: ${remaining}`;
+
+    if (userInput === gameState.secretNumber) {
+        feedback.className = 'feedback-success';
+        feedback.textContent = `You got it! The number was ${gameState.secretNumber}. It took you ${gameState.guessCount} tries!`;
+        document.querySelector('#message-section button').disabled = true; 
+    } else if (gameState.guessCount >= gameState.maxGuesses) {
+        feedback.className = 'feedback-fail';
+        feedback.textContent = `Out of tries! The secret number was ${gameState.secretNumber}.`;
+        document.querySelector('#message-section button').disabled = true;
+    } else if (userInput < gameState.secretNumber) {
+        feedback.className = 'feedback-fail';
+        feedback.textContent = "Too low! Try again.";
+    } else { // userInput > gameState.secretNumber
+        feedback.className = 'feedback-fail';
+        feedback.textContent = "Too high! Try again.";
+    }
+}
+
+// --- QR CODE LOGIC (DEPRECATED - now part of birthday mode) ---
+// This function is still needed, even if unused in the simplified version
+function generateQRCode() {
+    // Data to encode: The American Greetings link
+    const qrCodeData = "https://www.americangreetings.com/pickup?token=rc193f7437994410fb93cb6355bd39086&source=ag999"; 
+    
+    const encodedData = encodeURIComponent(qrCodeData);
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodedData}`;
+
+    const displayDiv = document.getElementById('qr-code-display');
+    
+    if (displayDiv.innerHTML.includes('<img')) {
+        return; 
+    }
+
+    displayDiv.innerHTML = `<img src="${qrCodeUrl}" alt="Birthday QR Code">`;
+    
+    document.getElementById('birthday-message-text').textContent = "Scan the code above to open your special digital birthday card!";
+}
+
+// --- JAVASCRIPT LOGIC FOR CHAT BUBBLE & BADGE ---
+
+// Function to toggle the chat panel visibility
+function toggleChatPanel() {
+    const panel = document.getElementById('announcement-panel');
+    const badge = document.getElementById('unread-badge');
+
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        markMessagesAsRead();
+    } else {
+        panel.classList.add('hidden');
+    }
+}
+
+// Function to load announcements and calculate the badge count
+function loadAnnouncements() {
+    const today = new Date().toISOString().split('T')[0]; 
+    const listElement = document.getElementById('announcement-list');
+    const badgeElement = document.getElementById('unread-badge');
+    const readAnnouncements = JSON.parse(localStorage.getItem('readAnnouncements') || '[]');
+    let unreadCount = 0;
+    let listHTML = '';
+
+    const activeAnnouncements = ANNOUNCEMENTS.filter(ann => ann.date <= today);
+
+    if (activeAnnouncements.length === 0) {
+        listElement.innerHTML = '<p class="placeholder-message">No new announcements yet.</p>';
+        badgeElement.classList.add('hidden');
+        return;
+    }
+
+    activeAnnouncements.reverse().forEach(ann => {
+        const isRead = readAnnouncements.includes(ann.date);
+        
+        listHTML += `
+            <div class="announcement-item ${isRead ? 'read' : ''}" data-date="${ann.date}">
+                <h4>${ann.title}</h4>
+                <p>${ann.message}</p>
+            </div>
+        `;
+        
+        if (!isRead) {
+            unreadCount++;
+        }
+    });
+
+    listElement.innerHTML = listHTML;
+    
+    if (unreadCount > 0) {
+        badgeElement.textContent = unreadCount;
+        badgeElement.classList.remove('hidden');
+    } else {
+        badgeElement.classList.add('hidden');
+    }
+}
+
+// Function to mark all current announcements as read
+function markMessagesAsRead() {
+    const today = new Date().toISOString().split('T')[0];
+    const newReadAnnouncements = ANNOUNCEMENTS
+        .filter(ann => ann.date <= today)
+        .map(ann => ann.date);
+    
+    localStorage.setItem('readAnnouncements', JSON.stringify(newReadAnnouncements));
+    loadAnnouncements();
+}
+
+// Initialize the countdown when the page loads
+loadAnnouncements();
+initializeDailyContent();
