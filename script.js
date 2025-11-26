@@ -96,7 +96,7 @@ const ANSWERS_DECODED = [
 // --- 3. ANNOUNCEMENT DATA (For Chat Bubble) ---
 const ANNOUNCEMENTS = [
     { 
-        date: "2025-11-25", 
+        date: "2025-11-26", 
         title: "🎁 December 6th Surprise Alert!", 
         message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
     },
@@ -389,6 +389,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
