@@ -39,9 +39,13 @@ body {
 }
 
 /* Main heading style */
+/* Locate this block in style.css */
 #main-heading {
-    color: #A36A9F; 
-    font-family: 'Times New Roman', serif;
+    /* Change the font-family line */
+    font-family: 'Playfair Display', serif; 
+    
+    color: #A36A9F; /* Primary Lavender */
+    /* ... rest of the existing styles ... */
     font-size: 2.5em;
     font-weight: 700;
     margin-bottom: 25px;
@@ -356,5 +360,6 @@ button:hover {
     /* Target the text/emoji itself for the subtle movement */
     animation: emoji-spin 20s linear infinite; /* Slow, constant spin */
 }
+
 
 
