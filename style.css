@@ -284,13 +284,15 @@ button:hover {
 .announcement-item {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
-    opacity: 0.9;
     transition: opacity 0.3s;
 }
 
+/* Locate this block */
 .announcement-item.read {
-    opacity: 0.5; 
-   background-color: #FAFAFA; /* Keeps background very light */
+    opacity: 0.5; /* Keep the dimming effect */
+    
+    /* CHANGE THIS LINE: Set the background to transparent so it doesn't conflict with the panel */
+    background-color: transparent;
 }
 
 .announcement-item h4 {
@@ -339,6 +341,7 @@ button:hover {
     /* Apply only if the panel is closed and badge is visible */
     animation: shake-and-pulse 4s ease-out infinite; 
 }
+
 
 
 
