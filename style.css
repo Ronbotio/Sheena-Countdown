@@ -344,5 +344,17 @@ button:hover {
 
 
 
+/* Add this new keyframe to the 'Custom Animations' section in style.css */
+@keyframes emoji-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Apply a subtle, slow spin to the main heading text/emoji */
+#main-heading {
+    /* ... existing styles ... */
+    /* Target the text/emoji itself for the subtle movement */
+    animation: emoji-spin 20s linear infinite; /* Slow, constant spin */
+}
 
 
