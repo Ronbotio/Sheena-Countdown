@@ -237,7 +237,6 @@ function checkCipherAnswer() {
         // Optional: Reset button focus
         document.querySelector('#message-section button').focus();
     }
-}}
 }
 
 
@@ -397,6 +396,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
