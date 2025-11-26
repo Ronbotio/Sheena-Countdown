@@ -188,6 +188,11 @@ function displayCipherGame() {
     activityElement.innerHTML = `
         <h2>🔒 ROT13 Cipher Challenge!</h2>
         <p class="instruction">Decode the riddle below. (Hint: Each letter is shifted 13 places.)</p>
+        
+        <p class="hint-text">
+            Stuck? Use this online tool: 
+            <a href="https://rot13.com/" target="_blank">ROT13 Decoder</a>
+        </p>
         <p class="riddle-box">${RIDDLES_ENCODED[randomIndex]}</p>
         <div class="input-group">
             <input type="text" id="cipher-input" placeholder="Your answer...">
@@ -355,3 +360,4 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
