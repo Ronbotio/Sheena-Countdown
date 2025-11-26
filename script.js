@@ -105,7 +105,7 @@ const ANNOUNCEMENTS = [
     { 
         date: "2025-11-25", 
         title: "🎁 December 6th Surprise Alert!", 
-        message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
+        message: "The first surprise is next Saturday! Dress warm & beautiful😉!" 
     },
     { 
         date: "2025-12-12", 
@@ -430,3 +430,4 @@ loadAnnouncements();
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
+
