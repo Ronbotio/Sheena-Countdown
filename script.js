@@ -134,7 +134,7 @@ function initializeDailyContent() {
     const surpriseSection = document.getElementById('surprise-section');
 
     // 2. SET PAGE HEADER
-    document.getElementById('main-heading').textContent = `Daily Encouragement & Activities`;
+    document.getElementById('main-heading').textContent = `🎀Daily Encouragement & Activities🎀`;
     
     // Hide the surprise section (only visible on birthday, which we removed)
     surpriseSection.style.display = 'none'; 
@@ -389,6 +389,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
