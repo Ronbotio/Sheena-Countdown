@@ -357,3 +357,40 @@ button:hover {
     color: #A36A9F; /* Lavender */
     font-size: 1em;
 }
+
+/* --- STATUS TRACKER STYLES (Add to style.css) --- */
+
+#status-tracker {
+    padding: 20px 0;
+    margin-bottom: 25px;
+}
+
+#status-icon {
+    font-size: 5em; /* Large icon size */
+    margin-bottom: 10px;
+    color: #A36A9F; /* Default icon color */
+    transition: color 0.5s ease;
+}
+
+#status-icon.birthday-active {
+    color: #E91E63; /* Pink/Alert color for the birthday! */
+    animation: bounce-icon 1s infinite alternate;
+}
+
+#status-message {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin: 5px 0 5px;
+    color: #3F3F3F;
+}
+
+#days-left-text {
+    font-size: 1.1em;
+    color: #5D9CEC; /* Cool Blue accent for important dates */
+    font-style: italic;
+}
+
+@keyframes bounce-icon {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
