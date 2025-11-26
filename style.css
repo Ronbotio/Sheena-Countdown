@@ -320,3 +320,40 @@ button:hover {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- PROGRESS BAR STYLING (Add to style.css) --- */
+
+#progress-container {
+    margin: 20px 0 40px;
+}
+
+#countdown-status {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #3F3F3F;
+}
+
+#progress-bar-shell {
+    width: 100%;
+    height: 25px;
+    background-color: #E8EAF6; /* Light gray-blue (Accent color) */
+    border-radius: 50px;
+    overflow: hidden; /* Keeps the fill inside the shell */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#progress-bar-fill {
+    height: 100%;
+    width: 0%; /* Starts at 0, JS updates this */
+    background: linear-gradient(90deg, #A36A9F, #5D9CEC); /* Gradient from Lavender to Blue */
+    border-radius: 50px;
+    transition: width 1s ease-out; /* Smooth animation when the page loads/updates */
+}
+
+#progress-text {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #A36A9F; /* Lavender */
+    font-size: 1em;
+}
