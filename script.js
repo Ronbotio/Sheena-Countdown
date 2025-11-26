@@ -53,9 +53,7 @@ const MESSAGES = [
     "Just like Eliza Doolittle's dream of a better life. Keep storing up treasures above. Oh when you arrive at your heavenly home 'Would'nt It Be Loverly?'",
     "I was just listening to 'Christian's Song' by Torey Dshaun and it made me think of the time on our way home from the BP O4W conference listening to 'Come and See' album in your car. Thank you for the bop! *starts dancing🕺🏾",
     "Eh......at your wedding we may need to add Alfred Doolittle's 'With a bit of luck' song. So we can.....I mean so I can dance. Lol"
-    "You’re not just growing older; you’re growing into a more magnificent version of the woman God designed you to be. Keep shining!"
-    "May this next year be filled with as much grace, revelation, and excellent food runs as the last! Happy Birthday season!"
-    ];
+];
 
 // --- 2. CIPHER GAME ARRAYS ---
 const RIDDLES_ENCODED = [
@@ -391,9 +389,6 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
-
-
-
 
 
 
