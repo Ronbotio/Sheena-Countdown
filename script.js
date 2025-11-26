@@ -55,8 +55,7 @@ const MESSAGES = [
     "Eh......at your wedding we may need to add Alfred Doolittle's 'With a bit of luck' song. So we can.....I mean so I can dance. Lol"
     "You’re not just growing older; you’re growing into a more magnificent version of the woman God designed you to be. Keep shining!"
     "May this next year be filled with as much grace, revelation, and excellent food runs as the last! Happy Birthday season!"
-
-];
+    ];
 
 // --- 2. CIPHER GAME ARRAYS ---
 const RIDDLES_ENCODED = [
@@ -392,6 +391,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
