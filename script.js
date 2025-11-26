@@ -171,10 +171,11 @@ function displayRandomMessage() {
     const activityElement = document.getElementById('message-section');
     
     if (activityElement) { // Safety check
-        activityElement.innerHTML = `
-            <h2>💌 Your Daily Encouragement:</h2>
-            <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
-        `;
+        // Change this line in displayRandomMessage():
+activityElement.innerHTML = `
+    <h2>💌 A Special Word for ${BIRTHDAY_PERSON}:</h2>
+    <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
+`;
     }
 }
 
@@ -205,15 +206,38 @@ function displayCipherGame() {
 function checkCipherAnswer() {
     const userInput = document.getElementById('cipher-input').value.toLowerCase().trim();
     const feedback = document.getElementById('cipher-feedback');
+    const inputField = document.getElementById('cipher-input'); // Store input field in a variable for clarity
+
+    // 1. CRITICAL RESET STEP: Remove any existing success or fail styles
+    inputField.classList.remove('input-success', 'input-fail');
+    
+    // Check if the input field is empty (optional clear)
+    if (userInput === '') {
+        feedback.className = '';
+        feedback.innerHTML = '';
+        return;
+    }
     
     if (userInput === gameState.cipherAnswer) {
+        // SUCCESS PATH
         feedback.className = 'feedback-success';
         feedback.innerHTML = `🎉 **You got it!** The answer is **"${gameState.cipherAnswer}"**. Well done!`;
         document.querySelector('#message-section button').disabled = true;
+        
+        // Final, permanent success styling
+        inputField.classList.add('input-success'); 
     } else {
+        // FAIL PATH
         feedback.className = 'feedback-fail';
         feedback.innerHTML = `😥 Not quite! Keep trying or use an online ROT13 tool!`;
+        
+        // Temporary feedback styling that resets on the next input
+        inputField.classList.add('input-fail'); 
+        
+        // Optional: Reset button focus
+        document.querySelector('#message-section button').focus();
     }
+}}
 }
 
 
@@ -241,10 +265,15 @@ function checkGuess() {
     const userInput = parseInt(document.getElementById('guess-input').value);
     const feedback = document.getElementById('guess-feedback');
     const triesLeftElement = document.getElementById('tries-left');
-    
+    const inputField = document.getElementById('guess-input'); // Store input field
+
+    // 1. CRITICAL RESET STEP: Remove any existing success or fail styles
+    inputField.classList.remove('input-success', 'input-fail');
+
     if (isNaN(userInput) || userInput < 1 || userInput > 50) {
         feedback.className = 'feedback-fail';
         feedback.textContent = "Please enter a valid number between 1 and 50.";
+        inputField.classList.add('input-fail'); // Apply temporary styling
         return;
     }
     
@@ -253,19 +282,27 @@ function checkGuess() {
     triesLeftElement.textContent = `Tries left: ${remaining}`;
 
     if (userInput === gameState.secretNumber) {
+        // SUCCESS PATH
         feedback.className = 'feedback-success';
         feedback.textContent = `You got it! The number was ${gameState.secretNumber}. It took you ${gameState.guessCount} tries!`;
-        document.querySelector('#message-section button').disabled = true; 
+        document.querySelector('#message-section button').disabled = true;
+        inputField.classList.add('input-success'); // Apply permanent success styling
     } else if (gameState.guessCount >= gameState.maxGuesses) {
+        // GAME OVER PATH
         feedback.className = 'feedback-fail';
         feedback.textContent = `Out of tries! The secret number was ${gameState.secretNumber}.`;
         document.querySelector('#message-section button').disabled = true;
+        inputField.classList.add('input-fail'); // Apply game over fail styling
     } else if (userInput < gameState.secretNumber) {
+        // FAIL PATH (Too Low)
         feedback.className = 'feedback-fail';
         feedback.textContent = "Too low! Try again.";
+        inputField.classList.add('input-fail'); // Apply temporary fail styling
     } else { // userInput > gameState.secretNumber
+        // FAIL PATH (Too High)
         feedback.className = 'feedback-fail';
         feedback.textContent = "Too high! Try again.";
+        inputField.classList.add('input-fail'); // Apply temporary fail styling
     }
 }
 
@@ -360,5 +397,6 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
