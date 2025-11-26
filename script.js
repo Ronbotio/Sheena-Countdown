@@ -61,7 +61,7 @@ const RIDDLES_ENCODED = [
     "V'z n grne-qebc onxrq va pynl, cresrpg sbe fpbbpvng pheel njnl. Jung nz V?",
     "V sel jvgu abguvat ohg n thfg, znxvat sbbq pevic jvgu n tbyqra pehfg. Jung nz V?",
     "V nz gur pbybe bs eblnygl, n zvk bs cnffvba'f erq naq pnyz frn oyhr. Jung nz V?",
-    "V nz bar yrff guna sbegl'f pbhag, guerr gvzrf guvegrra vf zl nzbhag. Jung ahzure nz V?",
+    "V nz bar yrff guna sbegl'f pbhag, guerr gvzmf guvegrra vf zl nzbhag. Jung ahzure nz V?",
     "V'z n Puevfgvna enccre jub oevatf gur urng, jvgu \"Ob Eneqv\" naq \"Unccl\" orngf. Jub nz V?",
     "V jnf n cebcurg, zhgr sbe n gvzr, gur sngure bs n Oncgvfg fhoyzmzr. Jub nz V?",
     "V'z n ehaavat fubr gung urycf lbh syl, anzrq sbe gur jvatrq ubefv va gur fxl. Jung nz V?",
@@ -103,7 +103,7 @@ const ANNOUNCEMENTS = [
         message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
     },
     { 
-        date: "2025-12-06", 
+        date: "2025-11-25", 
         title: "🎁 December 6th Surprise Alert!", 
         message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
     },
@@ -152,9 +152,31 @@ function updateCountdown() {
 
     // --- END FINAL STABLE DATE CALCULATION BLOCK ---
 
-    // Update main number display BEFORE the logic starts
-    document.getElementById('days-remaining').textContent = daysRemaining;
+    // 1. UPDATE PROGRESS BAR VISUALS
     
+    // Define the start date (Jan 1 of the birthday year, for a full year calculation)
+    const startDate = new Date(targetDate.getFullYear(), 0, 1); // Jan 1st of the target year
+    startDate.setHours(0, 0, 0, 0); // Ensure midnight time for accurate math
+
+    // Total days in the countdown period (Jan 1 to Birthday)
+    const totalDaysToTarget = Math.floor((targetDate.getTime() - startDate.getTime()) / MS_PER_DAY);
+    
+    // Days elapsed so far (Jan 1 to Today)
+    const daysElapsed = Math.floor((today.getTime() - startDate.getTime()) / MS_PER_DAY);
+
+    // Calculate percentage (clamped between 0 and 100)
+    let percentComplete = Math.min(100, Math.max(0, Math.floor((daysElapsed / totalDaysToTarget) * 100)));
+    
+    // Update progress bar fill level
+    document.getElementById('progress-bar-fill').style.width = percentComplete + '%';
+    
+    // Update the text display
+    document.getElementById('progress-text').textContent = 
+        `${percentComplete}% Complete (${daysRemaining} days left)`;
+    
+    // --- END PROGRESS BAR CALCULATION & UPDATE ---
+
+
     const surpriseSection = document.getElementById('surprise-section');
     const activitySection = document.getElementById('message-section');
 
@@ -164,11 +186,7 @@ function updateCountdown() {
         
         // 1. Reset display elements for COUNTDOWN MODE
         document.getElementById('main-heading').textContent = "Birthday Countdown";
-        
-        // **RESTORED TEXT CONTENT** - Ensure the structure matches index.html
-        document.getElementById('countdown-text').textContent = `I broke the countdown. Repair in progress...😁😁. Love you ${BIRTHDAY_PERSON}!`;
-        // The number is updated separately via #days-remaining
-        
+        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
         surpriseSection.style.display = 'none';
         activitySection.style.display = 'block';
 
@@ -238,12 +256,6 @@ function displayCipherGame() {
     activityElement.innerHTML = `
         <h2>🔒 ROT13 Cipher Challenge!</h2>
         <p class="instruction">Decode the riddle below. (Hint: Each letter is shifted 13 places.)</p>
-        
-        <p class="hint-text">
-            Stuck? Use this online tool: 
-            <a href="https://rot13.com/" target="_blank">ROT13 Decoder</a>
-        </p>
-        
         <p class="riddle-box">${RIDDLES_ENCODED[randomIndex]}</p>
         <div class="input-group">
             <input type="text" id="cipher-input" placeholder="Your answer...">
@@ -418,6 +430,3 @@ loadAnnouncements();
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
-
-
-
