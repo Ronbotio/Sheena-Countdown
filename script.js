@@ -180,32 +180,32 @@ function updateCountdown() {
     const surpriseSection = document.getElementById('surprise-section');
     const activitySection = document.getElementById('message-section');
 
-    if (daysRemaining > 0) {
-        
-        // --- COUNTDOWN MODE ---
-        
-        // 1. Reset display elements for COUNTDOWN MODE
-        document.getElementById('main-heading').textContent = "Birthday Countdown";
-        document.getElementById('countdown-text').textContent = `There are day(s) left until your birthday, ${BIRTHDAY_PERSON}!`;
-        surpriseSection.style.display = 'none';
-        activitySection.style.display = 'block';
+   // --- Replacement Block for Countdown Mode ---
 
-        // 2. ROBUST ACTIVITY SELECTION WITH TRY-CATCH FALLBACK
-        try {
-            const activityChoice = Math.floor(Math.random() * 3); 
-            
-            if (activityChoice === 0) {
-                displayRandomMessage();
-            } else if (activityChoice === 1) {
-                displayCipherGame();
-            } else {
-                displayGuessingGame();
-            }
-        } catch (error) {
-            // FALLBACK: If any activity function fails, display the reliable Random Message.
-            displayRandomMessage();
-            console.error("Activity selection failed. Showing fallback message:", error);
-        }
+// 1. Update general header elements
+document.getElementById('main-heading').textContent = "Birthday Countdown";
+// Ensure the activity section is visible
+surpriseSection.style.display = 'none';
+activitySection.style.display = 'block';
+
+// 2. ROBUST ACTIVITY SELECTION (Try-Catch is perfect)
+try {
+    const activityChoice = Math.floor(Math.random() * 3); 
+    
+    if (activityChoice === 0) {
+        displayRandomMessage();
+    } else if (activityChoice === 1) {
+        displayCipherGame();
+    } else {
+        displayGuessingGame();
+    }
+} catch (error) {
+    // FALLBACK
+    displayRandomMessage();
+    console.error("Activity selection failed. Showing fallback message:", error);
+}
+
+// NOTE: The progress bar text update runs outside this IF block, right after the date calculation.
 
     } else if (daysRemaining === 0) {
         
@@ -240,10 +240,15 @@ function displayRandomMessage() {
     const randomIndex = Math.floor(Math.random() * MESSAGES.length);
     const activityElement = document.getElementById('message-section');
     
-    activityElement.innerHTML = `
-        <h2>💌 Your Daily Encouragement:</h2>
-        <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
-    `;
+    // CRITICAL: Ensure activityElement is not null before setting innerHTML
+    if (activityElement) {
+        activityElement.innerHTML = `
+            <h2>💌 Your Daily Encouragement:</h2>
+            <p id="encouraging-message" class="message-box">${MESSAGES[randomIndex]}</p>
+        `;
+    } else {
+        console.error("Error: Could not find element #message-section to display activity.");
+    }
 }
 
 // --- CIPHER GAME LOGIC (ROT13) ---
@@ -430,4 +435,5 @@ loadAnnouncements();
 updateCountdown();
 // Update the countdown every minute
 setInterval(updateCountdown, 1000 * 60);
+
 
