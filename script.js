@@ -93,24 +93,24 @@ const ANSWERS_DECODED = [
 // --- 3. ANNOUNCEMENT DATA (For Chat Bubble) ---
 const ANNOUNCEMENTS = [
     { 
-        date: "2025-11-23", // YYYY-MM-DD format (Current date)
+        date: "", // YYYY-MM-DD format (Current date)
         title: "🔔 TEST: New Badge Alert!", 
         message: "This is a test to verify the unread badge and local storage are working correctly." 
     },
     { 
-        date: "2025-11-23", 
+        date: "", 
         title: "Welcome to the Countdown!", 
         message: "Check in daily for new games and encouragement. Tap the bubble for updates!" 
     },
     { 
-        date: "2025-12-06", 
+        date: "2025-11-25", 
         title: "🎁 December 6th Surprise Alert!", 
         message: "The first surprise is ready! Check the countdown page and click the surprise button!" 
     },
     { 
-        date: "2025-12-12", 
-        title: "🎬 Video Reminder!", 
-        message: "Make sure the Birthday Video is finalized and ready to share! You're almost there!" 
+        date: "2025-12-18", 
+        title: "", 
+        message: "" 
     },
     { 
         date: "2025-12-20", 
@@ -360,4 +360,5 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
