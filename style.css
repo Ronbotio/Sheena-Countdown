@@ -354,12 +354,7 @@ button:hover {
     100% { transform: rotate(360deg); }
 }
 
-/* Apply a subtle, slow spin to the main heading text/emoji */
-#main-heading {
-    /* ... existing styles ... */
-    /* Target the text/emoji itself for the subtle movement */
-    animation: emoji-spin 20s linear infinite; /* Slow, constant spin */
-}
+
 
 
 
