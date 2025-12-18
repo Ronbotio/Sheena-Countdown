@@ -103,7 +103,7 @@ const ANNOUNCEMENTS = [
     { 
         date: "2025-12-18",  
         title: "🎁 Happy Birthday, Sheena!"
-        message: "Happy Birthday! 🥳 I hope your day is as bright and wonderful as you are. Consider today the "Grand Opening" of your birthday season. Enjoy every second of it, but don't forget: your reserved surprise is still waiting for you this Saturday. Stay curious... the best is yet to come! 🤫✨"
+        message: "Happy Birthday! 🥳 I hope your day is as bright and wonderful as you are. Consider today the Grand Opening of your birthday season. Enjoy every second of it, but don't forget: your reserved surprise is still waiting for you this Saturday. Stay curious... the best is yet to come! 🤫✨"
     },
     { 
         date: "2025-12-20", 
@@ -389,6 +389,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
