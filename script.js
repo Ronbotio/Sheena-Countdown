@@ -96,14 +96,14 @@ const ANSWERS_DECODED = [
 // --- 3. ANNOUNCEMENT DATA (For Chat Bubble) ---
 const ANNOUNCEMENTS = [
     { 
-        date: "2025-11-27", 
-        title: "🚨 DEC 6TH ALERT! Your Surprise Is Reserved!", 
-        message: "Heads up! Your first big birthday surprise is scheduled for next Saturday. Make sure you're ready—it requires YOU! 🤫" 
+        date: "2025-12-17", 
+        title: "🎈DEC 18TH ALERT: MISSION BRIEFING ENCLOSED!"
+        message: "Happy Birthday Eve, Sheena! 🎂 While tomorrow is all about you, the real plot thickens this Saturday.  Your last big birthday surprise is officially locked in.  Keep your schedule clear and your energy high—this mission requires the Guest of Honor in peak form! 🕵️‍♀️🤫"
     },
     { 
-        date: "2025-12-18", 
-        title: "", 
-        message: "" 
+        date: "2025-12-18",  
+        title: "🎁 Happy Birthday, Sheena!"
+        message: "Happy Birthday! 🥳 I hope your day is as bright and wonderful as you are. Consider today the "Grand Opening" of your birthday season. Enjoy every second of it, but don't forget: your reserved surprise is still waiting for you this Saturday. Stay curious... the best is yet to come! 🤫✨"
     },
     { 
         date: "2025-12-20", 
@@ -389,6 +389,7 @@ function markMessagesAsRead() {
 // Initialize the countdown when the page loads
 loadAnnouncements();
 initializeDailyContent();
+
 
 
 
